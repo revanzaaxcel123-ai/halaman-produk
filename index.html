@@ -4,609 +4,176 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VanzShop.com — Premium Digital & Aksesoris</title>
-  <meta name="description" content="VanzShop.com: produk digital, desain, musik & video, dan aksesoris. Fast respon, harga bersahabat, metode pembayaran lengkap QRIS & channel resmi.">
+  <meta name="description" content="VanzShop.com: produk digital, desain, musik & video, dan aksesoris. Fast respon, transaksi aman, pengiriman kilat.">
   <link rel="icon" href="/assets/logo.svg">
-
-  <!-- ============= BASE STYLE ============= -->
-  <style>
-    :root{
-      --bg:#05070b;
-      --panel:#090d13;
-      --panel-soft:#0e141e;
-      --line:#181f2d;
-      --text:#e4ecff;
-      --muted:#9aa4b7;
-      --gold:#ffd86a;
-      --gold-strong:#e6b64a;
-      --gold-soft:#b8942a;
-      --danger:#ff4b6b;
-    }
-
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      background:radial-gradient(circle at top,#141826 0,#05070b 60%,#030408 100%);
-      color:var(--text);
-      font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-      -webkit-font-smoothing:antialiased;
-      overflow-x:hidden;
-      position:relative;
-    }
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-
-    .container{
-      max-width:1280px;
-      margin:0 auto;
-      padding:0 20px;
-      position:relative;
-      z-index:1;
-    }
-
-    /* ===== Floating bubble canvas ===== */
-    #bg-bubbles{
-      position:fixed;
-      inset:0;
-      z-index:-1;
-      pointer-events:none;
-    }
-
-    /* ===== Header ===== */
-    .header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      background:linear-gradient(to bottom,rgba(5,7,11,.92),rgba(5,7,11,.85),rgba(5,7,11,0));
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid rgba(255,255,255,.03);
-    }
-    .header-inner{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:12px 0;
-      gap:16px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .brand img{
-      width:32px;height:32px;
-      border-radius:10px;
-      box-shadow:0 0 0 2px rgba(255,216,106,.25);
-    }
-    .brand-text strong{
-      display:block;
-      font-weight:700;
-      letter-spacing:.02em;
-    }
-    .brand-text span{
-      display:block;
-      font-size:11px;
-      color:var(--muted);
-      margin-top:2px;
-    }
-
-    .nav{
-      display:flex;
-      gap:14px;
-      align-items:center;
-      font-size:14px;
-    }
-    .nav a{
-      opacity:.85;
-      padding:6px 0;
-    }
-    .nav a:hover{opacity:1}
-
-    .btn{
-      border-radius:999px;
-      border:1px solid var(--line);
-      padding:8px 14px;
-      font-size:13px;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      cursor:pointer;
-      background:rgba(9,13,19,.9);
-      color:var(--text);
-    }
-    .btn.primary{
-      background:linear-gradient(135deg,var(--gold),var(--gold-strong));
-      border-color:transparent;
-      color:#111;
-      font-weight:700;
-      box-shadow:0 8px 20px rgba(230,182,74,.35);
-    }
-    .btn.primary:hover{filter:brightness(1.05)}
-    .btn.sm{padding:6px 12px;font-size:12px}
-
-    /* ===== Hero ===== */
-    .hero{
-      padding:28px 0 18px;
-      display:grid;
-      grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);
-      gap:30px;
-      align-items:center;
-    }
-    .hero-text h1{
-      font-size:40px;
-      line-height:1.1;
-      margin-bottom:10px;
-    }
-    .hero-text .gold{
-      color:var(--gold);
-    }
-    .hero-text .mark{
-      background:linear-gradient(120deg,var(--gold),var(--gold-soft));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-    .hero-text p{
-      color:var(--muted);
-      font-size:14px;
-      max-width:470px;
-    }
-    .cta{
-      display:flex;
-      gap:10px;
-      margin-top:14px;
-      flex-wrap:wrap;
-    }
-    .badges{
-      list-style:none;
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      margin-top:10px;
-      font-size:13px;
-      color:var(--muted);
-    }
-
-    /* ===== Banner carousel (hero media) ===== */
-    .hero-media{min-height:260px;}
-    .banner-carousel{
-      position:relative;
-      width:100%;
-      border-radius:22px;
-      overflow:hidden;
-      background:radial-gradient(circle at top,var(--panel-soft),#05070b);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 14px 35px rgba(0,0,0,.5);
-    }
-    .banner-carousel .slides{
-      display:flex;
-      transition:transform .6s cubic-bezier(.2,.8,.2,1);
-      will-change:transform;
-    }
-    .banner-carousel img{
-      width:100%;
-      height:100%;
-      flex:0 0 100%;
-      object-fit:cover;
-      filter:saturate(1.02);
-    }
-    .banner-nav{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      pointer-events:none;
-      padding:0 10px;
-    }
-    .banner-nav button{
-      pointer-events:auto;
-      width:32px;height:32px;
-      border-radius:999px;
-      border:0;
-      font-size:18px;
-      display:grid;
-      place-items:center;
-      background:rgba(0,0,0,.55);
-      color:#fff;
-      cursor:pointer;
-    }
-    .banner-dots{
-      position:absolute;
-      left:50%;
-      bottom:12px;
-      transform:translateX(-50%);
-      display:flex;
-      gap:8px;
-    }
-    .banner-dots button{
-      width:8px;height:8px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.5);
-      background:rgba(0,0,0,.3);
-    }
-    .banner-dots button.active{
-      border-color:transparent;
-      background:#fff;
-    }
-    .banner-tag{
-      position:absolute;
-      left:14px;
-      top:14px;
-      font-size:11px;
-      padding:4px 9px;
-      border-radius:999px;
-      background:rgba(0,0,0,.65);
-      border:1px solid rgba(255,255,255,.25);
-      color:#fff;
-      display:inline-flex;
-      align-items:center;
-      gap:4px;
-    }
-    .banner-tag span{
-      width:6px;height:6px;border-radius:999px;
-      background:radial-gradient(circle,var(--gold),var(--danger));
-      box-shadow:0 0 6px rgba(255,107,135,.8);
-    }
-
-    /* ===== Teleprompter metode pembayaran ===== */
-    .pay-strip-wrap{
-      padding:10px 0 18px;
-    }
-    .pay-strip{
-      position:relative;
-      overflow:hidden;
-      border-radius:999px;
-      background:linear-gradient(90deg,rgba(255,216,106,.14),rgba(255,255,255,.02));
-      border:1px solid rgba(255,216,106,.3);
-      box-shadow:0 8px 28px rgba(0,0,0,.55);
-    }
-    .pay-strip::before{
-      content:"Metode pembayaran resmi · ";
-      position:absolute;
-      left:18px;
-      top:50%;
-      transform:translateY(-50%);
-      font-size:11px;
-      text-transform:uppercase;
-      letter-spacing:.18em;
-      color:var(--muted);
-      z-index:2;
-    }
-    .pay-strip-inner{
-      display:flex;
-      align-items:center;
-      gap:32px;
-      padding:8px 18px 8px 180px; /* kasih space buat label kiri */
-      white-space:nowrap;
-      animation:pay-scroll 26s linear infinite;
-    }
-    .pay-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:6px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(9,13,19,.92);
-      box-shadow:0 4px 14px rgba(0,0,0,.35);
-      font-size:12px;
-      color:var(--muted);
-    }
-    .pay-pill img{
-      width:20px;height:20px;
-      border-radius:6px;
-      object-fit:cover;
-    }
-    .pay-pill strong{
-      color:var(--text);
-      font-weight:600;
-    }
-    @keyframes pay-scroll{
-      from{transform:translateX(0)}
-      to{transform:translateX(-50%)}
-    }
-
-    /* ===== Category chips ===== */
-    .cats{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin:6px 0 2px;
-    }
-    .chip{
-      background:var(--panel-soft);
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:8px 12px;
-      font-size:13px;
-      color:var(--text);
-      cursor:pointer;
-    }
-    .chip.active{
-      border-color:var(--gold);
-      color:var(--gold);
-      background:rgba(255,216,106,.06);
-    }
-
-    /* ===== Products grid ===== */
-    .section-title{
-      font-size:22px;
-      margin:20px 0 10px;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
-    }
-    .card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:14px;
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      position:relative;
-      transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s;
-      will-change:transform;
-    }
-    .card:hover{
-      transform:translateY(-8px);
-      box-shadow:0 20px 40px rgba(0,0,0,.45),0 0 0 1px rgba(255,216,106,.16);
-    }
-    .card img{
-      width:100%;
-      aspect-ratio:4/3;
-      object-fit:cover;
-      background:#111;
-      transition:transform .5s cubic-bezier(.2,.8,.2,1), filter .5s;
-    }
-    .card:hover img{
-      transform:translateY(-2px) scale(1.04);
-      filter:drop-shadow(0 14px 24px rgba(0,0,0,.45));
-    }
-    .card-body{
-      padding:14px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-    .pill{
-      display:inline-block;
-      padding:4px 8px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      font-size:11px;
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.08em;
-    }
-    .row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-top:4px;
-      gap:10px;
-    }
-    .price{
-      color:var(--gold);
-      font-weight:800;
-      font-size:14px;
-    }
-    .desc{color:var(--muted);font-size:13px}
-
-    .card h3 a{
-      background:linear-gradient(90deg,#fff,var(--gold),#fff);
-      background-size:200% 100%;
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      opacity:.9;
-      transition:opacity .3s, background-position .7s;
-    }
-    .card:hover h3 a{
-      opacity:1;
-      background-position:100% 0;
-    }
-
-    /* ===== Features ===== */
-    .features{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin:26px 0 10px;
-    }
-    .feature{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:14px;
-    }
-    .feature .ico{
-      width:40px;height:40px;
-      display:grid;place-items:center;
-      background:#151b26;
-      border-radius:10px;
-      border:1px solid var(--line);
-      font-size:20px;
-    }
-
-    /* ===== Footer ===== */
-    .footer{
-      border-top:1px solid var(--line);
-      margin-top:26px;
-      padding:18px 0 26px;
-    }
-    .foot-grid{
-      display:grid;
-      grid-template-columns:2fr 1fr 1fr;
-      gap:18px;
-    }
-    .foot-brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:10px;
-    }
-    .muted{color:var(--muted);font-size:13px}
-    .links{
-      list-style:none;
-      display:grid;
-      gap:8px;
-      font-size:14px;
-    }
-
-    .wa-floating{
-      position:fixed;
-      right:16px;
-      bottom:18px;
-      z-index:30;
-      background:#25d366;
-      border-radius:999px;
-      padding:10px;
-      box-shadow:0 16px 40px rgba(0,0,0,.4);
-    }
-    .wa-floating img{width:28px;height:28px}
-
-    /* ===== Responsive ===== */
-    @media (max-width:980px){
-      .hero{
-        grid-template-columns:1fr;
-      }
-      .hero-media{order:-1}
-      .grid{
-        grid-template-columns:repeat(2,1fr);
-      }
-      .foot-grid{
-        grid-template-columns:1fr 1fr;
-      }
-    }
-    @media (max-width:680px){
-      .header-inner{
-        flex-wrap:wrap;
-      }
-      .nav{display:none}
-      .hero-text h1{font-size:30px}
-      .grid{grid-template-columns:1fr}
-      .pay-strip-inner{animation-duration:32s}
-    }
-    @media (prefers-reduced-motion:reduce){
-      *{animation:none!important;transition:none!important}
-    }
-  </style>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Background bubbles -->
-  <canvas id="bg-bubbles"></canvas>
+  <!-- background bubble -->
+  <div class="bg-layer" aria-hidden="true"></div>
 
-  <!-- ========== HEADER ========== -->
-  <header class="header">
-    <div class="container header-inner">
-      <a href="/" class="brand">
-        <img src="/assets/logo.svg" alt="VanzShop.com logo">
-        <div class="brand-text">
-          <strong>VanzShop.com</strong>
-          <span>premium store</span>
-        </div>
+  <!-- HEADER -->
+  <header class="header container">
+    <a class="brand" href="/">
+      <img src="/assets/logo.svg" alt="Logo VanzShop" width="32" height="32">
+      <div class="brand-text">
+        <strong>VanzShop.com</strong>
+        <span>premium store</span>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="#kategori">Kategori</a>
+      <a href="#produk">Produk</a>
+      <a href="#keunggulan">Keunggulan</a>
+      <a class="btn sm" target="_blank" rel="noopener"
+         href="https://wa.me/62895415204928?text=Halo%20VanzShop.com%2C%20saya%20mau%20tanya">
+        WhatsApp
       </a>
-      <nav class="nav">
-        <a href="#kategori">Kategori</a>
-        <a href="#produk">Produk</a>
-        <a href="#keunggulan">Keunggulan</a>
-        <a class="btn sm" target="_blank" rel="noopener" href="https://wa.me/62895415204928?text=Halo%20VanzShop.com%2C%20saya%20mau%20tanya">WhatsApp</a>
-      </nav>
-    </div>
+    </nav>
   </header>
 
-  <!-- ========== HERO + BANNER ========== -->
+  <!-- HERO -->
   <section class="hero container">
-    <div class="hero-text">
-      <h1>Belanja <span class="gold">lebih premium</span> di <span class="mark">VanzShop.com</span></h1>
-      <p>Produk digital & aksesoris pilihan. Support 24/7, transaksi aman, pengiriman kilat.</p>
-      <div class="cta">
-        <a class="btn primary" href="#produk">Lihat Produk</a>
-        <a class="btn" href="mailto:revanzabussines@gmail.com">Email kami</a>
-      </div>
-      <ul class="badges">
-        <li>⭐ 4.9/5 pelanggan puas</li>
-        <li>⚡ Proses cepat</li>
-        <li>🛡️ Garansi aman</li>
-      </ul>
-    </div>
+    <div class="hero-layout">
 
-    <div class="hero-media">
-      <div class="banner-carousel" aria-label="Promo banner VanzShop.com">
-        <div class="slides">
-          <img src="/assets/banner/banner1.jpg" alt="Promo VanzShop.com banner 1">
-          <img src="/assets/banner/banner2.jpg" alt="Promo VanzShop.com banner 2">
-          <img src="/assets/banner/banner3.jpg" alt="Promo VanzShop.com banner 3">
-          <img src="/assets/banner/banner4.jpg" alt="Promo VanzShop.com banner 4">
-          <img src="/assets/banner/banner5.jpg" alt="Promo VanzShop.com banner 5">
+      <!-- teks kiri -->
+      <div class="hero-main">
+        <h1>Belanja <span class="gold">lebih premium</span> di
+          <span class="mark">VanzShop.com</span>
+        </h1>
+        <p>Produk digital & aksesoris pilihan. Support 24/7, transaksi aman, pengiriman kilat.</p>
+
+        <div class="cta">
+          <a class="btn primary" href="#produk">Lihat Produk</a>
+          <a class="btn ghost" href="mailto:revanzabussines@gmail.com">Email kami</a>
         </div>
-        <div class="banner-tag"><span></span> Promo digital & aksesoris</div>
-        <div class="banner-nav">
-          <button type="button" class="banner-prev" aria-label="Sebelumnya">‹</button>
-          <button type="button" class="banner-next" aria-label="Berikutnya">›</button>
+
+        <ul class="badges">
+          <li>⭐ 4.9/5 pelanggan puas</li>
+          <li>⚡ Proses cepat</li>
+          <li>🛡️ Garansi aman</li>
+        </ul>
+
+        <!-- TELEPROMPTER METODE PEMBAYARAN -->
+        <div class="pay-marquee" aria-label="Metode pembayaran">
+          <div class="pay-track">
+            <!-- set 1 -->
+            <div class="pay-pill">
+              <span class="pill-icon">💳</span>
+              <div>
+                <div class="pill-title">QRIS All Payment</div>
+                <div class="pill-sub">Scan semua e-wallet & m-banking</div>
+              </div>
+            </div>
+            <div class="pay-pill">
+              <span class="pill-icon">🏦</span>
+              <div>
+                <div class="pill-title">Virtual Account Bank</div>
+                <div class="pill-sub">BCA · BNI · BRI · Mandiri</div>
+              </div>
+            </div>
+            <div class="pay-pill">
+              <span class="pill-icon">⚙️</span>
+              <div>
+                <div class="pill-title">Gateway Duitku</div>
+                <div class="pill-sub">Channel resmi & realtime</div>
+              </div>
+            </div>
+            <div class="pay-pill">
+              <span class="pill-icon">📲</span>
+              <div>
+                <div class="pill-title">E-Wallet Populer</div>
+                <div class="pill-sub">DANA · OVO · GoPay · LinkAja</div>
+              </div>
+            </div>
+            <div class="pay-pill">
+              <span class="pill-icon">🧾</span>
+              <div>
+                <div class="pill-title">Invoice Otomatis</div>
+                <div class="pill-sub">Update status pembayaran realtime</div>
+              </div>
+            </div>
+            <div class="pay-pill">
+              <span class="pill-icon">🤝</span>
+              <div>
+                <div class="pill-title">Support Reseller</div>
+                <div class="pill-sub">Cocok buat jualan ulang</div>
+              </div>
+            </div>
+
+            <!-- set 2 (copy buat loop halus) -->
+            <div class="pay-pill">
+              <span class="pill-icon">💳</span>
+              <div>
+                <div class="pill-title">QRIS All Payment</div>
+                <div class="pill-sub">Scan semua e-wallet & m-banking</div>
+              </div>
+            </div>
+            <div class="pay-pill">
+              <span class="pill-icon">🏦</span>
+              <div>
+                <div class="pill-title">Virtual Account Bank</div>
+                <div class="pill-sub">BCA · BNI · BRI · Mandiri</div>
+              </div>
+            </div>
+            <div class="pay-pill">
+              <span class="pill-icon">⚙️</span>
+              <div>
+                <div class="pill-title">Gateway Duitku</div>
+                <div class="pill-sub">Channel resmi & realtime</div>
+              </div>
+            </div>
+            <div class="pay-pill">
+              <span class="pill-icon">📲</span>
+              <div>
+                <div class="pill-title">E-Wallet Populer</div>
+                <div class="pill-sub">DANA · OVO · GoPay · LinkAja</div>
+              </div>
+            </div>
+            <div class="pay-pill">
+              <span class="pill-icon">🧾</span>
+              <div>
+                <div class="pill-title">Invoice Otomatis</div>
+                <div class="pill-sub">Update status pembayaran realtime</div>
+              </div>
+            </div>
+            <div class="pay-pill">
+              <span class="pill-icon">🤝</span>
+              <div>
+                <div class="pill-title">Support Reseller</div>
+                <div class="pill-sub">Cocok buat jualan ulang</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="banner-dots" aria-hidden="true"></div>
+
       </div>
+
+      <!-- banner kanan, gede -->
+      <div class="hero-banner">
+        <div class="banner-carousel">
+          <div class="slides">
+            <img src="/assets/banner/banner1.jpg" alt="Promo VanzShop banner 1">
+            <img src="/assets/banner/banner2.jpg" alt="Promo VanzShop banner 2">
+            <img src="/assets/banner/banner3.jpg" alt="Promo VanzShop banner 3">
+            <img src="/assets/banner/banner4.jpg" alt="Promo VanzShop banner 4">
+            <img src="/assets/banner/banner5.jpg" alt="Promo VanzShop banner 5">
+          </div>
+          <button class="prev" aria-label="Banner sebelumnya">&#10094;</button>
+          <button class="next" aria-label="Banner selanjutnya">&#10095;</button>
+          <div class="banner-dots" aria-label="pager"></div>
+          <div class="banner-hint">Swipe / drag</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- ========== TELEPROMPTER PAYMENT METHODS ========== -->
-  <section class="pay-strip-wrap container">
-    <div class="pay-strip">
-      <div class="pay-strip-inner">
-        <!-- track 1 -->
-        <div class="pay-pill">
-          <img src="/assets/qris.jpg" alt="QRIS">
-          <div><strong>QRIS All Payment</strong><br><span>e-wallet, m-banking, retail</span></div>
-        </div>
-        <div class="pay-pill">
-          <img src="/assets/spotify.jpg" alt="Duitku">
-          <div><strong>Gateway Duitku</strong><br><span>VA Bank & channel resmi</span></div>
-        </div>
-        <div class="pay-pill">
-          <img src="/assets/youtube.jpg" alt="Bank">
-          <div><strong>Virtual Account Bank</strong><br><span>BCA, BNI, BRI, Mandiri</span></div>
-        </div>
-        <div class="pay-pill">
-          <img src="/assets/zoom.jpg" alt="Invoice">
-          <div><strong>Invoice Otomatis</strong><br><span>Update status realtime</span></div>
-        </div>
-        <div class="pay-pill">
-          <img src="/assets/netflix.jpg" alt="Support">
-          <div><strong>Admin Fast Respon</strong><br><span>Bantu cek & verifikasi</span></div>
-        </div>
-
-        <!-- track 2 (ulang supaya animasi endless) -->
-        <div class="pay-pill">
-          <img src="/assets/qris.jpg" alt="QRIS">
-          <div><strong>QRIS All Payment</strong><br><span>e-wallet, m-banking, retail</span></div>
-        </div>
-        <div class="pay-pill">
-          <img src="/assets/spotify.jpg" alt="Duitku">
-          <div><strong>Gateway Duitku</strong><br><span>VA Bank & channel resmi</span></div>
-        </div>
-        <div class="pay-pill">
-          <img src="/assets/youtube.jpg" alt="Bank">
-          <div><strong>Virtual Account Bank</strong><br><span>BCA, BNI, BRI, Mandiri</span></div>
-        </div>
-        <div class="pay-pill">
-          <img src="/assets/zoom.jpg" alt="Invoice">
-          <div><strong>Invoice Otomatis</strong><br><span>Update status realtime</span></div>
-        </div>
-        <div class="pay-pill">
-          <img src="/assets/netflix.jpg" alt="Support">
-          <div><strong>Admin Fast Respon</strong><br><span>Bantu cek & verifikasi</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== CATEGORY CHIPS ========== -->
+  <!-- KATEGORI -->
   <section id="kategori" class="container cats">
     <button class="chip active">Semua</button>
     <button class="chip">Desain</button>
@@ -615,7 +182,7 @@
     <button class="chip">Aksesoris</button>
   </section>
 
-  <!-- ========== PRODUCTS ========== -->
+  <!-- PRODUK -->
   <section id="produk" class="container">
     <h2 class="section-title">Produk Unggulan</h2>
     <div class="grid">
@@ -627,7 +194,7 @@
         <div class="card-body">
           <div class="pill">DESAIN</div>
           <h3><a href="/beli/index.html?slug=canva">Canva Pro</a></h3>
-          <p class="desc">Akses template & fitur premium untuk desain apa pun.</p>
+          <p class="desc">Akses template &amp; fitur premium untuk desain apa pun.</p>
           <div class="row">
             <span class="price">Mulai Rp 25.000</span>
             <a class="btn sm" href="/beli/index.html?slug=canva">Beli</a>
@@ -643,7 +210,7 @@
         <div class="card-body">
           <div class="pill">MUSIK &amp; VIDEO</div>
           <h3><a href="/beli/index.html?slug=capcut">CapCut Pro</a></h3>
-          <p class="desc">Export tanpa watermark & resource premium.</p>
+          <p class="desc">Export tanpa watermark &amp; resource premium.</p>
           <div class="row">
             <span class="price">Mulai Rp 20.000</span>
             <a class="btn sm" href="/beli/index.html?slug=capcut">Beli</a>
@@ -749,37 +316,20 @@
     </div>
   </section>
 
-  <!-- ========== FEATURES ========== -->
-  <section id="keunggulan" class="container features">
-    <div class="feature">
-      <div class="ico">⚡</div>
-      <div>
-        <h4>Proses Instan</h4>
-        <p class="muted">Pengerjaan cepat setelah pembayaran terkonfirmasi.</p>
-      </div>
-    </div>
-    <div class="feature">
-      <div class="ico">🛡️</div>
-      <div>
-        <h4>Transaksi Aman</h4>
-        <p class="muted">Dukungan admin &amp; garansi sesuai ketentuan.</p>
-      </div>
-    </div>
-    <div class="feature">
-      <div class="ico">💬</div>
-      <div>
-        <h4>Support 24/7</h4>
-        <p class="muted">Hubungi WhatsApp kapan saja untuk bantuan.</p>
-      </div>
-    </div>
+  <!-- PARTNER GRID (gambar panjang antigravity style, kalau mau pakai) -->
+  <section id="keunggulan" class="container partners">
+    <h2 class="section-title">Dipercaya berbagai pelanggan</h2>
+    <p class="muted">Mulai dari content creator, pelapak marketplace, hingga agency.</p>
+    <!-- kalau nanti punya gambar grid partner sendiri taruh di sini -->
+    <!-- <img src="/assets/partners-grid.jpg" alt="Brand yang menggunakan VanzShop" class="partners-img"> -->
   </section>
 
-  <!-- ========== FOOTER ========== -->
+  <!-- FOOTER SIMPLE -->
   <footer class="footer">
     <div class="container foot-grid">
       <div>
-        <div class="foot-brand">
-          <img src="/assets/logo.svg" alt="" width="32" height="32">
+        <div class="brand foot-brand">
+          <img src="/assets/logo.svg" alt="" width="28" height="28">
           <div class="brand-text">
             <strong>VanzShop.com</strong>
             <span>premium store</span>
@@ -787,8 +337,8 @@
         </div>
         <p class="muted">
           Email: <a href="mailto:revanzabussines@gmail.com">revanzabussines@gmail.com</a><br>
-          WhatsApp: <a href="https://wa.me/62895415204928" target="_blank">0895-4152-04928</a><br>
-          Instagram: <a href="https://instagram.com/revanza_axcell" target="_blank">@revanza_axcell</a>
+          WhatsApp: <a href="https://wa.me/62895415204928" target="_blank" rel="noopener">0895-4152-04928</a><br>
+          Instagram: <a href="https://instagram.com/revanza_axcell" target="_blank" rel="noopener">@revanza_axcell</a>
         </p>
       </div>
       <div>
@@ -796,7 +346,7 @@
         <ul class="links">
           <li><a href="#produk">Produk</a></li>
           <li><a href="#keunggulan">Keunggulan</a></li>
-          <li><a target="_blank" href="https://wa.me/62895415204928?text=Halo%20VanzShop.com">Tanya Admin</a></li>
+          <li><a href="https://wa.me/62895415204928?text=Halo%20VanzShop" target="_blank" rel="noopener">Tanya Admin</a></li>
         </ul>
       </div>
       <div>
@@ -810,108 +360,88 @@
     </div>
   </footer>
 
-  <!-- WA floating -->
-  <a class="wa-floating" target="_blank" href="https://wa.me/62895415204928?text=Halo%20VanzShop%2C%20saya%20mau%20order">
+  <!-- WA FLOAT -->
+  <a class="wa" target="_blank"
+     href="https://wa.me/62895415204928?text=Halo%20VanzShop%2C%20saya%20mau%20order">
     <img src="/assets/wa.svg" alt="WhatsApp">
   </a>
 
-  <!-- ========== SCRIPTS ========== -->
   <script>
-    // Year in footer
+    // tahun footer
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // ===== Banner carousel =====
-    (function(){
+    // BANNER CAROUSEL (auto 3 detik + tombol + dots)
+    (function () {
       const root = document.querySelector('.banner-carousel');
-      if(!root) return;
+      if (!root) return;
       const slides = root.querySelector('.slides');
-      const imgs = Array.from(root.querySelectorAll('img'));
+      const imgs = Array.from(slides.querySelectorAll('img'));
+      const prevBtn = root.querySelector('.prev');
+      const nextBtn = root.querySelector('.next');
       const dotsWrap = root.querySelector('.banner-dots');
-      let index = 0;
-      let timer;
 
-      function renderDots(){
-        dotsWrap.innerHTML = imgs.map((_,i)=>(
-          `<button data-i="${i}" class="${i===index?'active':''}"></button>`
-        )).join('');
-        dotsWrap.querySelectorAll('button').forEach(btn=>{
-          btn.onclick = ()=> go(+btn.dataset.i);
+      let index = 0;
+      let timer = null;
+
+      function renderDots() {
+        dotsWrap.innerHTML = imgs.map((_, i) =>
+          `<button type="button" data-i="${i}" class="${i === index ? 'active' : ''}" aria-label="Banner ${i + 1}"></button>`
+        ).join('');
+        Array.from(dotsWrap.querySelectorAll('button')).forEach(btn => {
+          btn.addEventListener('click', () => show(+btn.dataset.i));
         });
       }
-      function go(i, {manual=false}={}){
+
+      function show(i, animate = true) {
         index = (i + imgs.length) % imgs.length;
-        slides.style.transform = `translateX(-${index*100}%)`;
-        renderDots();
-        if(manual) restart();
-      }
-      function restart(){
-        clearInterval(timer);
-        timer = setInterval(()=>go(index+1), 3000);
+        slides.style.transition = animate ? 'transform .6s cubic-bezier(.2,.8,.2,1)' : 'none';
+        slides.style.transform = `translateX(-${index * 100}%)`;
+        Array.from(dotsWrap.children).forEach((d, idx) =>
+          d.classList.toggle('active', idx === index)
+        );
       }
 
-      root.querySelector('.banner-prev').onclick = ()=>go(index-1,{manual:true});
-      root.querySelector('.banner-next').onclick = ()=>go(index+1,{manual:true});
+      function startAuto() {
+        stopAuto();
+        timer = setInterval(() => show(index + 1), 3000);
+      }
+      function stopAuto() {
+        if (timer) clearInterval(timer);
+      }
+
+      prevBtn.addEventListener('click', () => { show(index - 1); startAuto(); });
+      nextBtn.addEventListener('click', () => { show(index + 1); startAuto(); });
+
+      root.addEventListener('mouseenter', stopAuto);
+      root.addEventListener('mouseleave', startAuto);
+
+      // drag / swipe (simple)
+      let startX = 0, currentX = 0, dragging = false;
+      function onDown(x) { dragging = true; startX = currentX = x; slides.style.transition = 'none'; stopAuto(); }
+      function onMove(x) {
+        if (!dragging) return;
+        currentX = x;
+        const dx = currentX - startX;
+        slides.style.transform = `translateX(calc(-${index * 100}% + ${dx}px))`;
+      }
+      function onUp() {
+        if (!dragging) return;
+        const dx = currentX - startX;
+        dragging = false;
+        if (Math.abs(dx) > 80) show(index + (dx < 0 ? 1 : -1));
+        else show(index);
+        startAuto();
+      }
+      root.addEventListener('mousedown', e => onDown(e.clientX));
+      window.addEventListener('mousemove', e => onMove(e.clientX));
+      window.addEventListener('mouseup', onUp);
+      root.addEventListener('touchstart', e => onDown(e.touches[0].clientX), { passive: true });
+      root.addEventListener('touchmove', e => onMove(e.touches[0].clientX), { passive: true });
+      root.addEventListener('touchend', onUp);
 
       renderDots();
-      restart();
-    })();
-
-    // ===== Bubble background =====
-    (function(){
-      const c = document.getElementById('bg-bubbles');
-      if(!c) return;
-      const ctx = c.getContext('2d');
-      let W,H,DPR = Math.min(2, window.devicePixelRatio || 1);
-      let bubbles = [];
-
-      function resize(){
-        W = c.width  = innerWidth * DPR;
-        H = c.height = innerHeight * DPR;
-        c.style.width  = innerWidth + 'px';
-        c.style.height = innerHeight + 'px';
-        bubbles = [];
-        const count = Math.round(18 * (W*H/ (1400*800*DPR*DPR)));
-        for(let i=0;i<count;i++) bubbles.push(makeBubble());
-      }
-      function rand(a,b){return a + Math.random()*(b-a);}
-      function makeBubble(){
-        const r = rand(40,120) * DPR;
-        const x = rand(-r, W+r);
-        const y = rand(-r, H+r);
-        const vy = rand(0.01,0.05) * DPR;
-        const vx = rand(-0.03,0.03) * DPR;
-        const gold = Math.random()<0.35;
-        return {x,y,r,vy,vx,gold,alpha:rand(0.25,0.75)};
-      }
-
-      function tick(){
-        ctx.clearRect(0,0,W,H);
-        for(const b of bubbles){
-          b.y -= b.vy;
-          b.x += b.vx;
-          if(b.y + b.r < -40 || b.x < -200 || b.x > W+200){
-            Object.assign(b, makeBubble(), {y:H+ b.r});
-          }
-          const gx = b.x, gy = b.y;
-          const grad = ctx.createRadialGradient(gx,gy,b.r*0.1,gx,gy,b.r);
-          if(b.gold){
-            grad.addColorStop(0, `rgba(255,216,106,${0.45*b.alpha})`);
-            grad.addColorStop(1, 'rgba(0,0,0,0)');
-          }else{
-            grad.addColorStop(0, `rgba(118,140,255,${0.35*b.alpha})`);
-            grad.addColorStop(1, 'rgba(0,0,0,0)');
-          }
-          ctx.beginPath();
-          ctx.fillStyle = grad;
-          ctx.arc(gx,gy,b.r,0,Math.PI*2);
-          ctx.fill();
-        }
-        requestAnimationFrame(tick);
-      }
-
-      resize();
-      window.addEventListener('resize', resize);
-      requestAnimationFrame(tick);
+      show(0, false);
+      startAuto();
     })();
   </script>
 </body>

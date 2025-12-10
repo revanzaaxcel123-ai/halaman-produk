@@ -102,20 +102,14 @@
     .btn.ghost{background:rgba(4,6,10,.4)}
     .btn.sm{padding:8px 12px;font-size:14px}
 
-    /* ===== HERO BARU (STACK) ===== */
     .hero{
+      display:grid;
+      grid-template-columns:1.05fr;
+      gap:20px;
+      align-items:center;
       padding:28px 0 8px;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
     }
-    .hero-top{
-      max-width:760px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .hero h1{font-size:40px;line-height:1.1;margin:0}
+    .hero h1{font-size:40px;line-height:1.1;margin:0 0 8px}
     .gold{color:var(--gold)}
     .mark{
       background:linear-gradient(135deg,var(--gold),var(--gold-2));
@@ -123,94 +117,161 @@
       background-clip:text;
       color:transparent;
     }
-    .hero p{color:var(--muted);margin:6px 0 0}
+    .hero p{color:var(--muted);max-width:480px}
     .cta{display:flex;gap:10px;margin-top:14px}
     .badges{
-      display:flex;gap:14px;margin:8px 0 0;padding:0;list-style:none;
+      display:flex;gap:14px;margin:12px 0 0;padding:0;list-style:none;
       color:var(--muted);flex-wrap:wrap;
-      font-size:14px;
     }
 
-    /* ===== Banner Carousel (FULL WIDTH) ===== */
-    .hero-banner{
-      margin-top:6px;
+    /* ===== Payment ticker (teleprompter) ===== */
+    .payment-section{
+      margin-top:18px;
+      background:linear-gradient(135deg,rgba(248,212,112,.09),rgba(8,10,18,.9));
+      border-radius:18px;
+      border:1px solid rgba(246,206,74,.25);
+      padding:14px 18px;
+      position:relative;
+      overflow:hidden;
+      max-width:680px;
     }
-    .banner-carousel{
+    .payment-header{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+      font-size:14px;
+      color:var(--muted);
+    }
+    .payment-header span.label{
+      padding:4px 10px;
+      border-radius:999px;
+      background:rgba(7,8,12,.9);
+      border:1px solid rgba(246,206,74,.4);
+      color:var(--gold);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .ticker-mask{
+      position:relative;
+      overflow:hidden;
+    }
+    .ticker{
+      display:flex;
+      gap:32px;
+      white-space:nowrap;
+      animation:ticker-move 26s linear infinite;
+      will-change:transform;
+    }
+    .ticker-item{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(7,8,12,.9);
+      border:1px solid rgba(255,255,255,.04);
+      box-shadow:0 0 0 1px rgba(0,0,0,.4);
+      font-size:13px;
+    }
+    .ticker-item span.badge{
+      width:22px;height:22px;border-radius:999px;
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(246,206,74,.14);
+      color:var(--gold);
+      font-size:13px;
+    }
+    @keyframes ticker-move{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-50%)}
+    }
+
+    /* ===== HERO BANNER SLIDER (triple card style) ===== */
+    .hero-banner-wrap{
+      margin-top:10px;
+      margin-bottom:4px;
+    }
+    .hero-banner{
       position:relative;
       width:100%;
+      overflow:visible;
+      padding:6px 0 10px;
+    }
+    .hero-banner .track{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      will-change:transform;
+      transition:transform .35s cubic-bezier(.25,.8,.4,1);
+      padding:0 6%;
+    }
+    .hero-slide{
+      flex:0 0 72%;
+      max-width:72%;
       border-radius:26px;
       overflow:hidden;
       background:#05070b;
-      box-shadow:
-        0 26px 60px rgba(0,0,0,.65),
-        0 0 0 1px rgba(255,255,255,.03);
+      box-shadow:0 28px 60px rgba(0,0,0,.55);
+      transition:transform .35s cubic-bezier(.25,.8,.4,1), opacity .35s;
     }
-    .banner-inner-ratio{
-      position:relative;
+    .hero-slide img{
       width:100%;
-      padding-bottom:28%; /* rasio tinggi kayak premiumisme */
-    }
-    .banner-carousel .slides{
-      position:absolute;
-      inset:0;
-      display:flex;
-      transition:transform .6s cubic-bezier(.2,.8,.2,1);
-      cursor:grab;
-    }
-    .banner-carousel.dragging .slides{
-      cursor:grabbing;
-      transition:none;
-    }
-    .banner-carousel img{
-      width:100%;
-      height:100%;
-      flex:0 0 100%;
-      object-fit:cover;
-      transform:translateZ(0);
-      will-change:transform;
-      filter:saturate(1.02);
+      height:auto;
       display:block;
     }
-    .banner-carousel button{
+    .hero-slide.is-center{
+      transform:scale(1);
+      opacity:1;
+    }
+    .hero-slide:not(.is-center){
+      transform:scale(.92);
+      opacity:.75;
+    }
+    .hero-banner .arrow{
       position:absolute;
       top:50%;
       transform:translateY(-50%);
-      background:rgba(0,0,0,.55);
+      width:34px;height:72px;
+      border-radius:22px;
+      border:none;
+      background:rgba(0,0,0,.7);
       color:#fff;
-      border:0;
-      font-size:22px;
-      padding:8px;
-      cursor:pointer;
-      border-radius:999px;
       display:flex;
       align-items:center;
       justify-content:center;
-      backdrop-filter:blur(6px);
-      z-index:4;
+      cursor:pointer;
+      z-index:5;
+      backdrop-filter:blur(8px);
     }
-    .banner-carousel .prev{left:18px}
-    .banner-carousel .next{right:18px}
-    .banner-dots{
+    .hero-banner .arrow.prev{left:6px}
+    .hero-banner .arrow.next{right:6px}
+    .hero-banner .dots{
       position:absolute;
       left:50%;
-      bottom:14px;
+      bottom:12px;
       transform:translateX(-50%);
       display:flex;
       gap:8px;
-      z-index:5;
+      z-index:4;
     }
-    .banner-dots button{
-      width:9px;height:9px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.6);
-      background:rgba(0,0,0,.2);
+    .hero-banner .dots button{
+      width:7px;height:7px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.7);
+      background:rgba(0,0,0,.3);
       padding:0;
     }
-    .banner-dots button.active{background:#fff;border-color:transparent}
-    /* hint disembunyiin */
-    .banner-hint{display:none;}
+    .hero-banner .dots button.active{
+      background:#fff;
+      border-color:#fff;
+    }
+    .hero-banner.dragging .track{
+      transition:none!important;
+      cursor:grabbing;
+    }
 
     /* kategori + produk */
-    .cats{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .cats{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
     .chip{
       background:rgba(7,9,15,.9);
       border:1px solid var(--line);
@@ -294,82 +355,20 @@
     }
     .wa img{width:28px;height:28px;display:block}
 
-    /* ===== Payment ticker (teleprompter) ===== */
-    .payment-section{
-      margin-top:12px;
-      background:linear-gradient(135deg,rgba(248,212,112,.09),rgba(8,10,18,.9));
-      border-radius:18px;
-      border:1px solid rgba(246,206,74,.25);
-      padding:12px 16px;
-      position:relative;
-      overflow:hidden;
-    }
-    .payment-header{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:8px;
-      font-size:14px;
-      color:var(--muted);
-      flex-wrap:wrap;
-    }
-    .payment-header span.label{
-      padding:4px 10px;
-      border-radius:999px;
-      background:rgba(7,8,12,.9);
-      border:1px solid rgba(246,206,74,.4);
-      color:var(--gold);
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:.04em;
-    }
-    .ticker-mask{
-      position:relative;
-      overflow:hidden;
-    }
-    .ticker{
-      display:flex;
-      gap:32px;
-      white-space:nowrap;
-      animation:ticker-move 26s linear infinite;
-      will-change:transform;
-    }
-    .ticker-item{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:6px 10px;
-      border-radius:999px;
-      background:rgba(7,8,12,.9);
-      border:1px solid rgba(255,255,255,.04);
-      box-shadow:0 0 0 1px rgba(0,0,0,.4);
-      font-size:13px;
-    }
-    .ticker-item span.badge{
-      width:22px;height:22px;border-radius:999px;
-      display:flex;align-items:center;justify-content:center;
-      background:rgba(246,206,74,.14);
-      color:var(--gold);
-      font-size:13px;
-    }
-    @keyframes ticker-move{
-      0%{transform:translateX(0)}
-      100%{transform:translateX(-50%)}
-    }
-
     /* responsive */
     @media (max-width:980px){
-      .hero h1{font-size:32px}
+      .hero{grid-template-columns:1fr}
+      .hero-banner .track{padding:0 10px}
+      .hero-slide{flex:0 0 85%;max-width:85%}
       .grid{grid-template-columns:repeat(2,1fr)}
       .foot-grid{grid-template-columns:1fr 1fr}
-      .banner-inner-ratio{padding-bottom:40%;}
     }
     @media (max-width:560px){
       .grid{grid-template-columns:1fr}
       .nav{display:none}
-      .hero h1{font-size:28px}
-      .payment-section{padding:10px 12px}
-      .banner-inner-ratio{padding-bottom:52%;}
+      .hero h1{font-size:30px}
+      .payment-section{padding:12px 12px;max-width:100%}
+      .hero-banner .arrow{width:30px;height:60px}
     }
 
     /* mobile: kurangin anim berat */
@@ -410,21 +409,18 @@
   </header>
 
   <section class="hero container">
-    <!-- teks + payment -->
-    <div class="hero-top">
-      <div class="hero-text">
-        <h1>Belanja <span class="gold">lebih premium</span> di <span class="mark">VanzShop.com</span></h1>
-        <p>Produk digital & aksesoris pilihan. Support 24/7, transaksi aman, pengiriman kilat.</p>
-        <div class="cta">
-          <a class="btn primary" href="#produk">Lihat Produk</a>
-          <a class="btn ghost" target="_blank" href="mailto:revanzabussines@gmail.com">Email kami</a>
-        </div>
-        <ul class="badges">
-          <li>⭐ 4.9/5 pelanggan puas</li>
-          <li>⚡ Proses cepat</li>
-          <li>🛡️ Garansi aman</li>
-        </ul>
+    <div class="hero-text">
+      <h1>Belanja <span class="gold">lebih premium</span> di <span class="mark">VanzShop.com</span></h1>
+      <p>Produk digital & aksesoris pilihan. Support 24/7, transaksi aman, pengiriman kilat.</p>
+      <div class="cta">
+        <a class="btn primary" href="#produk">Lihat Produk</a>
+        <a class="btn ghost" target="_blank" href="mailto:revanzabussines@gmail.com">Email kami</a>
       </div>
+      <ul class="badges">
+        <li>⭐ 4.9/5 pelanggan puas</li>
+        <li>⚡ Proses cepat</li>
+        <li>🛡️ Garansi aman</li>
+      </ul>
 
       <!-- Payment teleprompter -->
       <div class="payment-section">
@@ -477,24 +473,31 @@
       </div>
       <!-- end payment section -->
     </div>
+  </section>
 
-    <!-- Banner gede full width -->
+  <!-- HERO BANNER SLIDER (full width, triple card style) -->
+  <section class="container hero-banner-wrap">
     <div class="hero-banner">
-      <div class="banner-carousel">
-        <div class="banner-inner-ratio">
-          <div class="slides">
-            <img src="/assets/banner/banner1.jpg" alt="Banner 1" loading="lazy" decoding="async">
-            <img src="/assets/banner/banner2.jpg" alt="Banner 2" loading="lazy" decoding="async">
-            <img src="/assets/banner/banner3.jpg" alt="Banner 3" loading="lazy" decoding="async">
-            <img src="/assets/banner/banner4.jpg" alt="Banner 4" loading="lazy" decoding="async">
-            <img src="/assets/banner/banner5.jpg" alt="Banner 5" loading="lazy" decoding="async">
-          </div>
-          <button class="prev" aria-label="Slide sebelumnya">&#10094;</button>
-          <button class="next" aria-label="Slide berikutnya">&#10095;</button>
-          <div class="banner-dots" aria-label="pager"></div>
-          <div class="banner-hint"></div>
+      <button class="arrow prev" aria-label="Slide sebelumnya">&#10094;</button>
+      <div class="track">
+        <div class="hero-slide">
+          <img src="/assets/banner/banner1.jpg" alt="Banner 1" loading="lazy" decoding="async">
+        </div>
+        <div class="hero-slide">
+          <img src="/assets/banner/banner2.jpg" alt="Banner 2" loading="lazy" decoding="async">
+        </div>
+        <div class="hero-slide">
+          <img src="/assets/banner/banner3.jpg" alt="Banner 3" loading="lazy" decoding="async">
+        </div>
+        <div class="hero-slide">
+          <img src="/assets/banner/banner4.jpg" alt="Banner 4" loading="lazy" decoding="async">
+        </div>
+        <div class="hero-slide">
+          <img src="/assets/banner/banner5.jpg" alt="Banner 5" loading="lazy" decoding="async">
         </div>
       </div>
+      <button class="arrow next" aria-label="Slide berikutnya">&#10095;</button>
+      <div class="dots" aria-label="pager"></div>
     </div>
   </section>
 
@@ -696,83 +699,116 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // === Banner carousel: auto-slide 3 detik + drag + dot ===
+    // === HERO BANNER TRIPLE CAROUSEL ===
     (function(){
-      const root = document.querySelector('.banner-carousel');
+      const root = document.querySelector('.hero-banner');
       if (!root) return;
-      const slides = root.querySelector('.slides');
-      const imgs = Array.from(root.querySelectorAll('img'));
-      const dotsWrap = root.querySelector('.banner-dots');
+
+      const track = root.querySelector('.track');
+      const slides = Array.from(root.querySelectorAll('.hero-slide'));
+      const dotsWrap = root.querySelector('.dots');
+      const prevBtn = root.querySelector('.arrow.prev');
+      const nextBtn = root.querySelector('.arrow.next');
+
       let index = 0;
       let autoTimer = null;
-      let dragging = false;
-      let startX = 0, currentX = 0;
 
-      function setDots(){
-        dotsWrap.innerHTML = imgs.map((_,i)=>`<button data-i="${i}" class="${i===index?'active':''}" aria-label="Slide ${i+1}"></button>`).join('');
+      function buildDots(){
+        dotsWrap.innerHTML = slides.map((_,i)=>
+          `<button data-i="${i}" class="${i===index?'active':''}" aria-label="Slide ${i+1}"></button>`
+        ).join('');
         dotsWrap.querySelectorAll('button').forEach(b=>{
-          b.onclick = () => { show(+b.dataset.i); restartAuto(); };
+          b.onclick = () => { goTo(+b.dataset.i); restartAuto(); };
         });
       }
 
-      function show(i, animate=true){
-        index = (i + imgs.length) % imgs.length;
-        slides.style.transition = animate ? 'transform .6s cubic-bezier(.2,.8,.2,1)' : 'none';
-        slides.style.transform = `translateX(-${index*100}%)`;
-        setDots();
+      function targetOffset(i){
+        const slide = slides[i];
+        const containerWidth = root.clientWidth;
+        const slideWidth = slide.offsetWidth;
+        const left = slide.offsetLeft; // relative to track
+        return left - (containerWidth - slideWidth)/2;
       }
 
-      function next(){ show(index+1); }
-      function prev(){ show(index-1); }
+      function goTo(i, instant){
+        index = (i + slides.length) % slides.length;
+        const offset = targetOffset(index);
+        track.style.transition = instant ? 'none' : 'transform .35s cubic-bezier(.25,.8,.4,1)';
+        track.style.transform = `translateX(${-offset}px)`;
+        slides.forEach((s,idx)=> s.classList.toggle('is-center', idx===index));
+        buildDots();
+      }
+
+      function next(){ goTo(index+1); }
+      function prev(){ goTo(index-1); }
 
       function startAuto(){
         clearInterval(autoTimer);
-        autoTimer = setInterval(next, 3000); // 3 detik
+        autoTimer = setInterval(next, 3000);
       }
       function restartAuto(){
         clearInterval(autoTimer);
         autoTimer = setInterval(next, 3000);
       }
 
-      function onDown(x){
+      prevBtn.addEventListener('click', ()=>{ prev(); restartAuto(); });
+      nextBtn.addEventListener('click', ()=>{ next(); restartAuto(); });
+
+      // Drag / swipe behaviour
+      let dragging = false;
+      let startX = 0;
+      let startTransform = 0;
+
+      function currentTransform(){
+        const m = track.style.transform.match(/-?\d+(\.\d+)?/);
+        return m ? parseFloat(m[0]) : 0;
+      }
+
+      function pointerDown(x){
         dragging = true;
-        startX = currentX = x;
         root.classList.add('dragging');
+        startX = x;
+        startTransform = currentTransform();
         clearInterval(autoTimer);
       }
-      function onMove(x){
+      function pointerMove(x){
         if(!dragging) return;
-        currentX = x;
-        const dx = currentX - startX;
-        slides.style.transition = 'none';
-        slides.style.transform = `translateX(calc(-${index*100}% + ${dx}px))`;
+        const dx = x - startX;
+        track.style.transition = 'none';
+        track.style.transform = `translateX(${startTransform + dx}px)`;
       }
-      function onUp(){
+      function pointerUp(x){
         if(!dragging) return;
-        const dx = currentX - startX;
         dragging = false;
         root.classList.remove('dragging');
-        if(Math.abs(dx) > 80){
+        const dx = x - startX;
+        const threshold = slides[0].offsetWidth * 0.18;
+        if(Math.abs(dx) > threshold){
           if(dx < 0) next(); else prev();
         }else{
-          show(index);
+          goTo(index);
         }
         startAuto();
       }
 
-      root.querySelector('.next')?.addEventListener('click', ()=>{ next(); restartAuto(); });
-      root.querySelector('.prev')?.addEventListener('click', ()=>{ prev(); restartAuto(); });
+      root.addEventListener('mousedown', e=>pointerDown(e.clientX));
+      window.addEventListener('mousemove', e=>pointerMove(e.clientX));
+      window.addEventListener('mouseup', e=>pointerUp(e.clientX));
 
-      root.addEventListener('mousedown', e=>onDown(e.clientX));
-      window.addEventListener('mousemove', e=>onMove(e.clientX));
-      window.addEventListener('mouseup', onUp);
-      root.addEventListener('touchstart', e=>onDown(e.touches[0].clientX), {passive:true});
-      root.addEventListener('touchmove', e=>onMove(e.touches[0].clientX), {passive:true});
-      root.addEventListener('touchend', onUp);
+      root.addEventListener('touchstart', e=>pointerDown(e.touches[0].clientX), {passive:true});
+      root.addEventListener('touchmove', e=>pointerMove(e.touches[0].clientX), {passive:true});
+      root.addEventListener('touchend', e=>{
+        const x = (e.changedTouches[0] || e.touches[0] || {clientX:startX}).clientX;
+        pointerUp(x);
+      });
 
-      setDots();
-      show(0,false);
-      startAuto();
+      window.addEventListener('resize', ()=>goTo(index,true));
+
+      // init
+      requestAnimationFrame(()=>{
+        goTo(0,true);
+        startAuto();
+      });
     })();
   </script>
 </body>

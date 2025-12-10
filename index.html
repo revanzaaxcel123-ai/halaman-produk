@@ -4,22 +4,360 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VanzShop.com — Premium Digital & Aksesoris</title>
-  <meta name="description" content="VanzShop.com: produk digital, desain, musik & video, dan aksesoris. Fast respon, transaksi aman, pengiriman kilat.">
+  <meta name="description" content="VanzShop.com: produk digital, desain, musik & video, dan aksesoris. Fast respon, harga bersahabat.">
   <link rel="icon" href="/assets/logo.svg">
-  <link rel="stylesheet" href="/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#05070c;
+      --panel:#0e131a;
+      --line:#1a2030;
+      --text:#dde5ef;
+      --muted:#9aa4b2;
+      --gold:#f5d46b;
+      --gold-2:#e6b94a;
+      --pill-bg:#0b1018;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(550px 550px at 0% 10%, rgba(255,215,100,.28), transparent 60%),
+        radial-gradient(620px 620px at 100% 15%, rgba(120,170,255,.18), transparent 60%),
+        radial-gradient(520px 520px at 15% 90%, rgba(255,210,130,.22), transparent 65%),
+        #05070c;
+      color:var(--text);
+      font-family:Inter,system-ui,Arial,sans-serif;
+      overflow-x:hidden;
+      position:relative;
+    }
+    body::before,
+    body::after{
+      content:"";
+      position:fixed;
+      inset:auto;
+      width:380px;height:380px;
+      border-radius:50%;
+      filter:blur(12px);
+      opacity:.35;
+      pointer-events:none;
+      z-index:-1;
+      animation:float-orb 26s ease-in-out infinite alternate;
+    }
+    body::before{
+      left:-120px;top:-80px;
+      background:radial-gradient(circle at 30% 30%,rgba(255,230,150,.9),transparent 60%);
+    }
+    body::after{
+      right:-140px;bottom:-60px;
+      background:radial-gradient(circle at 60% 40%,rgba(120,160,255,.8),transparent 65%);
+      animation-delay:-8s;
+    }
+    @keyframes float-orb{
+      from{transform:translate3d(0,0,0);}
+      to{transform:translate3d(40px,40px,0);}
+    }
+
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* HEADER */
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 0 10px;
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:linear-gradient(to bottom,rgba(5,7,12,.96),rgba(5,7,12,.88),transparent);
+      backdrop-filter:blur(12px);
+    }
+    .brand{
+      display:flex;gap:10px;align-items:center;
+      text-decoration:none;color:inherit;
+    }
+    .brand-logo{
+      width:32px;height:32px;border-radius:12px;
+      display:grid;place-items:center;
+      background:radial-gradient(circle at 20% 0%,#fff, #ffd978 35%, #b88a2a 90%);
+      box-shadow:0 0 0 2px rgba(0,0,0,.6);
+      font-size:18px;font-weight:800;color:#111;
+    }
+    .brand-text strong{display:block;font-size:15px}
+    .brand-text span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+    .nav{display:flex;gap:14px;align-items:center}
+    .nav a{
+      color:var(--text);text-decoration:none;opacity:.85;font-size:14px;
+      padding:6px 10px;border-radius:999px;
+    }
+    .nav a:hover{opacity:1;background:rgba(255,255,255,.03)}
+    .btn{
+      border:1px solid var(--line);
+      padding:10px 16px;
+      border-radius:999px;
+      text-decoration:none;
+      color:var(--text);
+      font-size:14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      background:rgba(10,13,20,.9);
+    }
+    .btn.primary{
+      background:linear-gradient(135deg,var(--gold),var(--gold-2));
+      border-color:transparent;
+      color:#111;
+      font-weight:700;
+      box-shadow:0 8px 22px rgba(245,212,107,.28);
+    }
+    .btn.primary:hover{filter:brightness(1.03)}
+    .btn.ghost{background:transparent}
+    .btn.sm{padding:7px 12px;font-size:13px}
+
+    /* HERO */
+    .hero{padding:26px 0 12px;}
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.1fr) minmax(0,1.1fr);
+      gap:26px;
+      align-items:center;
+    }
+    .hero h1{
+      font-size:40px;
+      line-height:1.1;
+      margin:0 0 10px;
+    }
+    .gold-txt{color:var(--gold);}
+    .hero p{color:var(--muted);margin:0;max-width:420px;font-size:14px}
+    .cta{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+    .badges{
+      display:flex;gap:14px;margin:14px 0 0;padding:0;
+      list-style:none;color:var(--muted);flex-wrap:wrap;font-size:13px;
+    }
+
+    /* PAYMENT MARQUEE (TELEPROMPTER TEKS) */
+    .pay-shell{
+      margin-top:20px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.03);
+      background:radial-gradient(circle at 0 0,rgba(255,232,170,.16),transparent 55%),
+                 radial-gradient(circle at 100% 0,rgba(120,180,255,.14),transparent 55%),
+                 rgba(8,10,18,.95);
+      padding:10px 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .pay-shell::before{
+      content:"METODE PEMBAYARAN";
+      position:absolute;
+      left:16px;top:10px;
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
+      opacity:.9;
+    }
+    .pay-marquee{
+      margin-left:190px; /* kasih ruang label kiri */
+      overflow:hidden;
+    }
+    .pay-track{
+      display:flex;
+      gap:10px;
+      padding:4px 0;
+      animation:pay-scroll 26s linear infinite;
+    }
+    .pay-track:hover{animation-play-state:paused}
+    @keyframes pay-scroll{
+      from{transform:translateX(0);}
+      to{transform:translateX(-50%);}
+    }
+    .pay-pill{
+      display:inline-flex;align-items:center;gap:8px;
+      white-space:nowrap;
+      padding:7px 13px;
+      border-radius:999px;
+      background:var(--pill-bg);
+      border:1px solid rgba(255,255,255,.08);
+      font-size:12px;
+      box-shadow:0 0 0 1px rgba(0,0,0,.65);
+    }
+    .pay-pill span.emoji{
+      width:18px;height:18px;border-radius:50%;
+      display:grid;place-items:center;
+      background:radial-gradient(circle at 30% 0,#fff,var(--gold-2));
+      color:#111;font-size:11px;
+    }
+    .pay-pill b{font-weight:600}
+    .pay-pill small{color:var(--muted);opacity:.95}
+
+    /* BANNER CAROUSEL (BESAR) */
+    .banner-wrap{
+      margin-top:22px;
+    }
+    .banner-carousel{
+      position:relative;
+      width:100%;
+      max-width:1100px;
+      margin:0 auto;
+      overflow:hidden;
+      border-radius:24px;
+      box-shadow:0 24px 60px rgba(0,0,0,.55);
+      background:#000;
+      height:290px;
+    }
+    .banner-carousel .slides{
+      display:flex;
+      width:100%;
+      height:100%;
+      transition:transform .6s cubic-bezier(.2,.8,.2,1);
+    }
+    .banner-carousel img{
+      width:100%;height:100%;
+      flex:0 0 100%;
+      object-fit:cover;
+      display:block;
+    }
+    .banner-carousel button{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      background:rgba(0,0,0,.55);
+      color:#fff;
+      border:0;
+      font-size:26px;
+      width:38px;height:38px;
+      cursor:pointer;
+      border-radius:999px;
+      display:grid;place-items:center;
+      box-shadow:0 8px 18px rgba(0,0,0,.38);
+    }
+    .banner-carousel .prev{left:14px}
+    .banner-carousel .next{right:14px}
+    .banner-dots{
+      position:absolute;
+      left:50%;bottom:14px;
+      transform:translateX(-50%);
+      display:flex;gap:8px;
+    }
+    .banner-dots button{
+      width:9px;height:9px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.7);
+      background:rgba(0,0,0,.4);
+      padding:0;
+      cursor:pointer;
+    }
+    .banner-dots button.active{
+      background:#fff;
+      border-color:transparent;
+    }
+
+    /* CATEGORY FILTER */
+    .cats{
+      display:flex;gap:10px;flex-wrap:wrap;
+      margin-top:26px;
+    }
+    .chip{
+      background:rgba(8,11,18,.9);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:8px 13px;
+      color:var(--text);
+      font-size:13px;
+    }
+    .chip.active{border-color:var(--gold);color:var(--gold)}
+
+    /* PRODUCTS */
+    .section-title{font-size:22px;margin:26px 0 12px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:16px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      position:relative;
+      transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;
+    }
+    .card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 26px 50px rgba(0,0,0,.45),0 0 0 1px rgba(245,212,107,.16);
+    }
+    .card img{
+      width:100%;
+      aspect-ratio:4/3;
+      object-fit:cover;
+      background:#000;
+    }
+    .card-body{padding:14px;display:flex;gap:8px;flex-direction:column}
+    .pill{display:inline-block;padding:4px 9px;border-radius:999px;border:1px solid var(--line);font-size:12px;color:var(--muted)}
+    .row{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+    .price{color:var(--gold);font-weight:800;font-size:14px}
+    .desc{color:var(--muted);font-size:13px}
+    .card h3{margin:6px 0 0;font-size:15px}
+    .card h3 a{text-decoration:none;color:var(--text)}
+    .card h3 a:hover{color:#fff}
+
+    /* FOOTER SIMPLE */
+    .footer{
+      border-top:1px solid var(--line);
+      margin-top:34px;
+      padding:20px 0 24px;
+      font-size:13px;
+    }
+    .foot-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      gap:18px;
+    }
+    .muted{color:var(--muted)}
+    .links{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+    .links a{color:var(--text);text-decoration:none;opacity:.9}
+    .links a:hover{opacity:1;text-decoration:underline}
+
+    .wa{
+      position:fixed;right:16px;bottom:16px;
+      background:#25d366;border-radius:999px;padding:10px;
+      box-shadow:0 16px 40px rgba(0,0,0,.35);
+      z-index:30;
+    }
+    .wa img{width:28px;height:28px;display:block}
+
+    @media (max-width:1080px){
+      .hero-grid{grid-template-columns:1.1fr}
+      .banner-wrap{margin-top:20px}
+      .banner-carousel{height:230px}
+    }
+    @media (max-width:980px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .foot-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:640px){
+      .header{padding-top:14px}
+      .nav{display:none}
+      .hero h1{font-size:30px}
+      .banner-carousel{border-radius:16px;height:210px}
+      .cats{margin-top:18px}
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
-
-  <!-- background bubble -->
-  <div class="bg-layer" aria-hidden="true"></div>
-
-  <!-- HEADER -->
   <header class="header container">
-    <a class="brand" href="/">
-      <img src="/assets/logo.svg" alt="Logo VanzShop" width="32" height="32">
+    <a href="/" class="brand">
+      <div class="brand-logo">V</div>
       <div class="brand-text">
         <strong>VanzShop.com</strong>
         <span>premium store</span>
@@ -29,419 +367,306 @@
       <a href="#kategori">Kategori</a>
       <a href="#produk">Produk</a>
       <a href="#keunggulan">Keunggulan</a>
-      <a class="btn sm" target="_blank" rel="noopener"
-         href="https://wa.me/62895415204928?text=Halo%20VanzShop.com%2C%20saya%20mau%20tanya">
-        WhatsApp
-      </a>
+      <a class="btn sm" target="_blank" rel="noopener" href="https://wa.me/62895415204928?text=Halo%20VanzShop.com%2C%20saya%20mau%20tanya">WhatsApp</a>
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="hero container">
-    <div class="hero-layout">
-
-      <!-- teks kiri -->
-      <div class="hero-main">
-        <h1>Belanja <span class="gold">lebih premium</span> di
-          <span class="mark">VanzShop.com</span>
-        </h1>
-        <p>Produk digital & aksesoris pilihan. Support 24/7, transaksi aman, pengiriman kilat.</p>
-
-        <div class="cta">
-          <a class="btn primary" href="#produk">Lihat Produk</a>
-          <a class="btn ghost" href="mailto:revanzabussines@gmail.com">Email kami</a>
+  <main class="container">
+    <!-- HERO + BANNER -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <h1>Belanja <span class="gold-txt">lebih premium</span> di VanzShop.com</h1>
+          <p>Produk digital & aksesoris pilihan. Support 24/7, transaksi aman, pengiriman kilat.</p>
+          <div class="cta">
+            <a class="btn primary" href="#produk">Lihat Produk</a>
+            <a class="btn ghost" target="_blank" href="mailto:revanzabussines@gmail.com">Email kami</a>
+          </div>
+          <ul class="badges">
+            <li>⭐ 4.9/5 pelanggan puas</li>
+            <li>⚡ Proses cepat</li>
+            <li>🛡️ Garansi aman</li>
+          </ul>
         </div>
 
-        <ul class="badges">
-          <li>⭐ 4.9/5 pelanggan puas</li>
-          <li>⚡ Proses cepat</li>
-          <li>🛡️ Garansi aman</li>
-        </ul>
+        <div class="banner-wrap">
+          <div class="banner-carousel" id="banner">
+            <div class="slides">
+              <img src="/assets/banner/banner1.jpg" alt="Banner 1">
+              <img src="/assets/banner/banner2.jpg" alt="Banner 2">
+              <img src="/assets/banner/banner3.jpg" alt="Banner 3">
+              <img src="/assets/banner/banner4.jpg" alt="Banner 4">
+              <img src="/assets/banner/banner5.jpg" alt="Banner 5">
+            </div>
+            <button class="prev" aria-label="Sebelumnya">‹</button>
+            <button class="next" aria-label="Berikutnya">›</button>
+            <div class="banner-dots" aria-label="pager"></div>
+          </div>
+        </div>
+      </div>
 
-        <!-- TELEPROMPTER METODE PEMBAYARAN -->
-        <div class="pay-marquee" aria-label="Metode pembayaran">
+      <!-- TELEPROMPTER METODE PEMBAYARAN (TEKS SAJA) -->
+      <div class="pay-shell">
+        <div class="pay-marquee">
           <div class="pay-track">
-            <!-- set 1 -->
-            <div class="pay-pill">
-              <span class="pill-icon">💳</span>
-              <div>
-                <div class="pill-title">QRIS All Payment</div>
-                <div class="pill-sub">Scan semua e-wallet & m-banking</div>
-              </div>
-            </div>
-            <div class="pay-pill">
-              <span class="pill-icon">🏦</span>
-              <div>
-                <div class="pill-title">Virtual Account Bank</div>
-                <div class="pill-sub">BCA · BNI · BRI · Mandiri</div>
-              </div>
-            </div>
-            <div class="pay-pill">
-              <span class="pill-icon">⚙️</span>
-              <div>
-                <div class="pill-title">Gateway Duitku</div>
-                <div class="pill-sub">Channel resmi & realtime</div>
-              </div>
-            </div>
-            <div class="pay-pill">
-              <span class="pill-icon">📲</span>
-              <div>
-                <div class="pill-title">E-Wallet Populer</div>
-                <div class="pill-sub">DANA · OVO · GoPay · LinkAja</div>
-              </div>
-            </div>
-            <div class="pay-pill">
-              <span class="pill-icon">🧾</span>
-              <div>
-                <div class="pill-title">Invoice Otomatis</div>
-                <div class="pill-sub">Update status pembayaran realtime</div>
-              </div>
-            </div>
-            <div class="pay-pill">
-              <span class="pill-icon">🤝</span>
-              <div>
-                <div class="pill-title">Support Reseller</div>
-                <div class="pill-sub">Cocok buat jualan ulang</div>
-              </div>
-            </div>
+            <div class="pay-pill"><span class="emoji">🏦</span><div><b>Virtual Account Bank</b> <small>BCA · BNI · BRI · Mandiri</small></div></div>
+            <div class="pay-pill"><span class="emoji">⚡</span><div><b>Gateway Duitku</b> <small>Channel resmi & realtime</small></div></div>
+            <div class="pay-pill"><span class="emoji">💳</span><div><b>E-Wallet Populer</b> <small>DANA · OVO · GoPay · LinkAja</small></div></div>
+            <div class="pay-pill"><span class="emoji">📄</span><div><b>Invoice Otomatis</b> <small>Update status pembayaran realtime</small></div></div>
+            <div class="pay-pill"><span class="emoji">🤝</span><div><b>Support Reseller</b> <small>Cocok buat jualan ulang</small></div></div>
+            <div class="pay-pill"><span class="emoji">🧾</span><div><b>QRIS All Payment</b> <small>Scan semua e-wallet & m-banking</small></div></div>
 
-            <!-- set 2 (copy buat loop halus) -->
-            <div class="pay-pill">
-              <span class="pill-icon">💳</span>
-              <div>
-                <div class="pill-title">QRIS All Payment</div>
-                <div class="pill-sub">Scan semua e-wallet & m-banking</div>
-              </div>
-            </div>
-            <div class="pay-pill">
-              <span class="pill-icon">🏦</span>
-              <div>
-                <div class="pill-title">Virtual Account Bank</div>
-                <div class="pill-sub">BCA · BNI · BRI · Mandiri</div>
-              </div>
-            </div>
-            <div class="pay-pill">
-              <span class="pill-icon">⚙️</span>
-              <div>
-                <div class="pill-title">Gateway Duitku</div>
-                <div class="pill-sub">Channel resmi & realtime</div>
-              </div>
-            </div>
-            <div class="pay-pill">
-              <span class="pill-icon">📲</span>
-              <div>
-                <div class="pill-title">E-Wallet Populer</div>
-                <div class="pill-sub">DANA · OVO · GoPay · LinkAja</div>
-              </div>
-            </div>
-            <div class="pay-pill">
-              <span class="pill-icon">🧾</span>
-              <div>
-                <div class="pill-title">Invoice Otomatis</div>
-                <div class="pill-sub">Update status pembayaran realtime</div>
-              </div>
-            </div>
-            <div class="pay-pill">
-              <span class="pill-icon">🤝</span>
-              <div>
-                <div class="pill-title">Support Reseller</div>
-                <div class="pill-sub">Cocok buat jualan ulang</div>
-              </div>
-            </div>
+            <!-- duplikat buat loop halus -->
+            <div class="pay-pill"><span class="emoji">🏦</span><div><b>Virtual Account Bank</b> <small>BCA · BNI · BRI · Mandiri</small></div></div>
+            <div class="pay-pill"><span class="emoji">⚡</span><div><b>Gateway Duitku</b> <small>Channel resmi & realtime</small></div></div>
+            <div class="pay-pill"><span class="emoji">💳</span><div><b>E-Wallet Populer</b> <small>DANA · OVO · GoPay · LinkAja</small></div></div>
+            <div class="pay-pill"><span class="emoji">📄</span><div><b>Invoice Otomatis</b> <small>Update status pembayaran realtime</small></div></div>
+            <div class="pay-pill"><span class="emoji">🤝</span><div><b>Support Reseller</b> <small>Cocok buat jualan ulang</small></div></div>
+            <div class="pay-pill"><span class="emoji">🧾</span><div><b>QRIS All Payment</b> <small>Scan semua e-wallet & m-banking</small></div></div>
           </div>
-        </div>
-
-      </div>
-
-      <!-- banner kanan, gede -->
-      <div class="hero-banner">
-        <div class="banner-carousel">
-          <div class="slides">
-            <img src="/assets/banner/banner1.jpg" alt="Promo VanzShop banner 1">
-            <img src="/assets/banner/banner2.jpg" alt="Promo VanzShop banner 2">
-            <img src="/assets/banner/banner3.jpg" alt="Promo VanzShop banner 3">
-            <img src="/assets/banner/banner4.jpg" alt="Promo VanzShop banner 4">
-            <img src="/assets/banner/banner5.jpg" alt="Promo VanzShop banner 5">
-          </div>
-          <button class="prev" aria-label="Banner sebelumnya">&#10094;</button>
-          <button class="next" aria-label="Banner selanjutnya">&#10095;</button>
-          <div class="banner-dots" aria-label="pager"></div>
-          <div class="banner-hint">Swipe / drag</div>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- KATEGORI -->
+    <section id="kategori" class="cats">
+      <button class="chip active">Semua</button>
+      <button class="chip">Desain</button>
+      <button class="chip">Musik & Video</button>
+      <button class="chip">Productivity</button>
+      <button class="chip">Aksesoris</button>
+    </section>
 
-  <!-- KATEGORI -->
-  <section id="kategori" class="container cats">
-    <button class="chip active">Semua</button>
-    <button class="chip">Desain</button>
-    <button class="chip">Musik &amp; Video</button>
-    <button class="chip">Productivity</button>
-    <button class="chip">Aksesoris</button>
-  </section>
-
-  <!-- PRODUK -->
-  <section id="produk" class="container">
-    <h2 class="section-title">Produk Unggulan</h2>
-    <div class="grid">
-      <!-- CANVA -->
-      <article class="card">
-        <a href="/beli/index.html?slug=canva">
-          <img src="/assets/canva.jpg" alt="Canva Pro">
-        </a>
-        <div class="card-body">
-          <div class="pill">DESAIN</div>
-          <h3><a href="/beli/index.html?slug=canva">Canva Pro</a></h3>
-          <p class="desc">Akses template &amp; fitur premium untuk desain apa pun.</p>
-          <div class="row">
-            <span class="price">Mulai Rp 25.000</span>
-            <a class="btn sm" href="/beli/index.html?slug=canva">Beli</a>
+    <!-- PRODUK -->
+    <section id="produk">
+      <h2 class="section-title">Produk Unggulan</h2>
+      <div class="grid">
+        <!-- CANVA -->
+        <article class="card">
+          <a href="/beli/index.html?slug=canva">
+            <img src="/assets/canva.jpg" alt="Canva Pro">
+          </a>
+          <div class="card-body">
+            <div class="pill">DESAIN</div>
+            <h3><a href="/beli/index.html?slug=canva">Canva Pro</a></h3>
+            <p class="desc">Akses template & fitur premium untuk desain apa pun.</p>
+            <div class="row">
+              <span class="price">Mulai Rp 25.000</span>
+              <a class="btn sm" href="/beli/index.html?slug=canva">Beli</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- CAPCUT -->
-      <article class="card">
-        <a href="/beli/index.html?slug=capcut">
-          <img src="/assets/capcut.jpg" alt="CapCut Pro">
-        </a>
-        <div class="card-body">
-          <div class="pill">MUSIK &amp; VIDEO</div>
-          <h3><a href="/beli/index.html?slug=capcut">CapCut Pro</a></h3>
-          <p class="desc">Export tanpa watermark &amp; resource premium.</p>
-          <div class="row">
-            <span class="price">Mulai Rp 20.000</span>
-            <a class="btn sm" href="/beli/index.html?slug=capcut">Beli</a>
+        <!-- CAPCUT -->
+        <article class="card">
+          <a href="/beli/index.html?slug=capcut">
+            <img src="/assets/capcut.jpg" alt="CapCut Pro">
+          </a>
+          <div class="card-body">
+            <div class="pill">MUSIK & VIDEO</div>
+            <h3><a href="/beli/index.html?slug=capcut">CapCut Pro</a></h3>
+            <p class="desc">Export tanpa watermark & resource premium.</p>
+            <div class="row">
+              <span class="price">Mulai Rp 20.000</span>
+              <a class="btn sm" href="/beli/index.html?slug=capcut">Beli</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- CHATGPT -->
-      <article class="card">
-        <a href="/beli/index.html?slug=chatgpt">
-          <img src="/assets/chatgpt.jpg" alt="ChatGPT Access">
-        </a>
-        <div class="card-body">
-          <div class="pill">PRODUCTIVITY</div>
-          <h3><a href="/beli/index.html?slug=chatgpt">ChatGPT Access</a></h3>
-          <p class="desc">Akses tools AI untuk kerja &amp; belajar makin cepat.</p>
-          <div class="row">
-            <span class="price">Mulai Rp 30.000</span>
-            <a class="btn sm" href="/beli/index.html?slug=chatgpt">Beli</a>
+        <!-- CHATGPT -->
+        <article class="card">
+          <a href="/beli/index.html?slug=chatgpt">
+            <img src="/assets/chatgpt.jpg" alt="ChatGPT Access">
+          </a>
+          <div class="card-body">
+            <div class="pill">PRODUCTIVITY</div>
+            <h3><a href="/beli/index.html?slug=chatgpt">ChatGPT Access</a></h3>
+            <p class="desc">Akses tools AI untuk kerja & belajar makin cepat.</p>
+            <div class="row">
+              <span class="price">Mulai Rp 30.000</span>
+              <a class="btn sm" href="/beli/index.html?slug=chatgpt">Beli</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- ALIGHT MOTION -->
-      <article class="card">
-        <a href="/beli/index.html?slug=alightmotion">
-          <img src="/assets/alightmotion.jpg" alt="Alight Motion">
-        </a>
-        <div class="card-body">
-          <div class="pill">DESAIN</div>
-          <h3><a href="/beli/index.html?slug=alightmotion">Alight Motion</a></h3>
-          <p class="desc">Edit video/animasi di HP dengan fitur premium.</p>
-          <div class="row">
-            <span class="price">Mulai Rp 20.000</span>
-            <a class="btn sm" href="/beli/index.html?slug=alightmotion">Beli</a>
+        <!-- ALIGHT MOTION -->
+        <article class="card">
+          <a href="/beli/index.html?slug=alightmotion">
+            <img src="/assets/alightmotion.jpg" alt="Alight Motion">
+          </a>
+          <div class="card-body">
+            <div class="pill">DESAIN</div>
+            <h3><a href="/beli/index.html?slug=alightmotion">Alight Motion</a></h3>
+            <p class="desc">Edit video/animasi di HP dengan fitur premium.</p>
+            <div class="row">
+              <span class="price">Mulai Rp 20.000</span>
+              <a class="btn sm" href="/beli/index.html?slug=alightmotion">Beli</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- YOUTUBE -->
-      <article class="card">
-        <a href="/beli/index.html?slug=youtube">
-          <img src="/assets/youtube.jpg" alt="YouTube Premium">
-        </a>
-        <div class="card-body">
-          <div class="pill">MUSIK &amp; VIDEO</div>
-          <h3><a href="/beli/index.html?slug=youtube">YouTube Premium</a></h3>
-          <p class="desc">Tonton tanpa iklan, termasuk YouTube Music.</p>
-          <div class="row">
-            <span class="price">Mulai Rp 30.000</span>
-            <a class="btn sm" href="/beli/index.html?slug=youtube">Beli</a>
+        <!-- YOUTUBE -->
+        <article class="card">
+          <a href="/beli/index.html?slug=youtube">
+            <img src="/assets/youtube.jpg" alt="YouTube Premium">
+          </a>
+          <div class="card-body">
+            <div class="pill">MUSIK & VIDEO</div>
+            <h3><a href="/beli/index.html?slug=youtube">YouTube Premium</a></h3>
+            <p class="desc">Tonton tanpa iklan, termasuk YouTube Music.</p>
+            <div class="row">
+              <span class="price">Mulai Rp 30.000</span>
+              <a class="btn sm" href="/beli/index.html?slug=youtube">Beli</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- SPOTIFY -->
-      <article class="card">
-        <a href="/beli/index.html?slug=spotify">
-          <img src="/assets/spotify.jpg" alt="Spotify Premium">
-        </a>
-        <div class="card-body">
-          <div class="pill">MUSIK &amp; VIDEO</div>
-          <h3><a href="/beli/index.html?slug=spotify">Spotify Premium</a></h3>
-          <p class="desc">Dengerin lagu bebas iklan &amp; download offline.</p>
-          <div class="row">
-            <span class="price">Mulai Rp 25.000</span>
-            <a class="btn sm" href="/beli/index.html?slug=spotify">Beli</a>
+        <!-- SPOTIFY -->
+        <article class="card">
+          <a href="/beli/index.html?slug=spotify">
+            <img src="/assets/spotify.jpg" alt="Spotify Premium">
+          </a>
+          <div class="card-body">
+            <div class="pill">MUSIK & VIDEO</div>
+            <h3><a href="/beli/index.html?slug=spotify">Spotify Premium</a></h3>
+            <p class="desc">Dengerin lagu bebas iklan & download offline.</p>
+            <div class="row">
+              <span class="price">Mulai Rp 25.000</span>
+              <a class="btn sm" href="/beli/index.html?slug=spotify">Beli</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- ZOOM -->
-      <article class="card">
-        <a href="/beli/index.html?slug=zoom">
-          <img src="/assets/zoom.jpg" alt="Zoom Pro">
-        </a>
-        <div class="card-body">
-          <div class="pill">PRODUCTIVITY</div>
-          <h3><a href="/beli/index.html?slug=zoom">Zoom Pro</a></h3>
-          <p class="desc">Meeting panjang tanpa limit, fitur rekam &amp; lainnya.</p>
-          <div class="row">
-            <span class="price">Mulai Rp 40.000</span>
-            <a class="btn sm" href="/beli/index.html?slug=zoom">Beli</a>
+        <!-- ZOOM -->
+        <article class="card">
+          <a href="/beli/index.html?slug=zoom">
+            <img src="/assets/zoom.jpg" alt="Zoom Pro">
+          </a>
+          <div class="card-body">
+            <div class="pill">PRODUCTIVITY</div>
+            <h3><a href="/beli/index.html?slug=zoom">Zoom Pro</a></h3>
+            <p class="desc">Meeting panjang tanpa limit, fitur rekam & lainnya.</p>
+            <div class="row">
+              <span class="price">Mulai Rp 40.000</span>
+              <a class="btn sm" href="/beli/index.html?slug=zoom">Beli</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- NETFLIX -->
-      <article class="card">
-        <a href="/beli/index.html?slug=netflix">
-          <img src="/assets/netflix.jpg" alt="Netflix">
-        </a>
-        <div class="card-body">
-          <div class="pill">MUSIK &amp; VIDEO</div>
-          <h3><a href="/beli/index.html?slug=netflix">Netflix</a></h3>
-          <p class="desc">Nonton film &amp; series favorit, kualitas HD hingga 4K.</p>
-          <div class="row">
-            <span class="price">Mulai Rp 35.000</span>
-            <a class="btn sm" href="/beli/index.html?slug=netflix">Beli</a>
+        <!-- NETFLIX -->
+        <article class="card">
+          <a href="/beli/index.html?slug=netflix">
+            <img src="/assets/netflix.jpg" alt="Netflix">
+          </a>
+          <div class="card-body">
+            <div class="pill">MUSIK & VIDEO</div>
+            <h3><a href="/beli/index.html?slug=netflix">Netflix</a></h3>
+            <p class="desc">Nonton film & series favorit, kualitas HD hingga 4K.</p>
+            <div class="row">
+              <span class="price">Mulai Rp 35.000</span>
+              <a class="btn sm" href="/beli/index.html?slug=netflix">Beli</a>
+            </div>
           </div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- PARTNER GRID (gambar panjang antigravity style, kalau mau pakai) -->
-  <section id="keunggulan" class="container partners">
-    <h2 class="section-title">Dipercaya berbagai pelanggan</h2>
-    <p class="muted">Mulai dari content creator, pelapak marketplace, hingga agency.</p>
-    <!-- kalau nanti punya gambar grid partner sendiri taruh di sini -->
-    <!-- <img src="/assets/partners-grid.jpg" alt="Brand yang menggunakan VanzShop" class="partners-img"> -->
-  </section>
-
-  <!-- FOOTER SIMPLE -->
-  <footer class="footer">
-    <div class="container foot-grid">
-      <div>
-        <div class="brand foot-brand">
-          <img src="/assets/logo.svg" alt="" width="28" height="28">
-          <div class="brand-text">
-            <strong>VanzShop.com</strong>
-            <span>premium store</span>
-          </div>
-        </div>
-        <p class="muted">
-          Email: <a href="mailto:revanzabussines@gmail.com">revanzabussines@gmail.com</a><br>
-          WhatsApp: <a href="https://wa.me/62895415204928" target="_blank" rel="noopener">0895-4152-04928</a><br>
-          Instagram: <a href="https://instagram.com/revanza_axcell" target="_blank" rel="noopener">@revanza_axcell</a>
-        </p>
+        </article>
       </div>
-      <div>
-        <h4>Informasi</h4>
-        <ul class="links">
-          <li><a href="#produk">Produk</a></li>
-          <li><a href="#keunggulan">Keunggulan</a></li>
-          <li><a href="https://wa.me/62895415204928?text=Halo%20VanzShop" target="_blank" rel="noopener">Tanya Admin</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Kebijakan</h4>
-        <ul class="links">
-          <li>Pengembalian sesuai syarat</li>
-          <li>Privasi &amp; keamanan</li>
-          <li>Copyright © <span id="y"></span> VanzShop</li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+    </section>
 
-  <!-- WA FLOAT -->
-  <a class="wa" target="_blank"
-     href="https://wa.me/62895415204928?text=Halo%20VanzShop%2C%20saya%20mau%20order">
+    <!-- KEUNGGULAN SINGKAT -->
+    <section id="keunggulan" class="features" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0;">
+      <div class="feature" style="display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;">
+        <div style="width:40px;height:40px;display:grid;place-items:center;background:#151b26;border:1px solid var(--line);border-radius:10px;font-size:20px">⚡</div>
+        <div><h4 style="margin:0 0 4px;font-size:15px">Proses Instan</h4><p style="margin:0;font-size:13px;color:var(--muted)">Order diproses cepat setelah pembayaran terkonfirmasi.</p></div>
+      </div>
+      <div class="feature" style="display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;">
+        <div style="width:40px;height:40px;display:grid;place-items:center;background:#151b26;border:1px solid var(--line);border-radius:10px;font-size:20px">🛡️</div>
+        <div><h4 style="margin:0 0 4px;font-size:15px">Transaksi Aman</h4><p style="margin:0;font-size:13px;color:var(--muted)">Dukungan admin & garansi sesuai ketentuan produk.</p></div>
+      </div>
+      <div class="feature" style="display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;">
+        <div style="width:40px;height:40px;display:grid;place-items:center;background:#151b26;border:1px solid var(--line);border-radius:10px;font-size:20px">💬</div>
+        <div><h4 style="margin:0 0 4px;font-size:15px">Support 24/7</h4><p style="margin:0;font-size:13px;color:var(--muted)">Butuh bantuan? Tinggal chat WhatsApp, selalu ready.</p></div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="foot-grid">
+        <div>
+          <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
+            <img src="/assets/logo.svg" alt="" width="32" height="32">
+            <div class="brand-text">
+              <strong>VanzShop.com</strong>
+              <span>premium store</span>
+            </div>
+          </div>
+          <p class="muted">Email: <a href="mailto:revanzabussines@gmail.com">revanzabussines@gmail.com</a><br>
+          WhatsApp: <a target="_blank" href="https://wa.me/62895415204928">0895-4152-04928</a><br>
+          Instagram: <a target="_blank" href="https://instagram.com/revanza_axcell">@revanza_axcell</a></p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px;font-size:15px">Informasi</h4>
+          <ul class="links">
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#keunggulan">Keunggulan</a></li>
+            <li><a target="_blank" href="https://wa.me/62895415204928?text=Halo%20VanzShop">Tanya Admin</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px;font-size:15px">Kebijakan</h4>
+          <ul class="links">
+            <li>Pengembalian sesuai syarat</li>
+            <li>Privasi & keamanan</li>
+            <li>Copyright © <span id="yearFoot"></span> VanzShop</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <a class="wa" target="_blank" href="https://wa.me/62895415204928?text=Halo%20VanzShop%2C%20saya%20mau%20order">
     <img src="/assets/wa.svg" alt="WhatsApp">
   </a>
 
   <script>
     // tahun footer
-    document.getElementById('y').textContent = new Date().getFullYear();
+    document.getElementById('yearFoot').textContent = new Date().getFullYear();
 
-    // BANNER CAROUSEL (auto 3 detik + tombol + dots)
-    (function () {
+    // BANNER SLIDER
+    (function(){
       const root = document.querySelector('.banner-carousel');
-      if (!root) return;
+      if(!root) return;
       const slides = root.querySelector('.slides');
-      const imgs = Array.from(slides.querySelectorAll('img'));
-      const prevBtn = root.querySelector('.prev');
-      const nextBtn = root.querySelector('.next');
-      const dotsWrap = root.querySelector('.banner-dots');
-
+      const imgs   = Array.from(root.querySelectorAll('img'));
+      const prev   = root.querySelector('.prev');
+      const next   = root.querySelector('.next');
+      const dotsBox= root.querySelector('.banner-dots');
       let index = 0;
       let timer = null;
 
-      function renderDots() {
-        dotsWrap.innerHTML = imgs.map((_, i) =>
-          `<button type="button" data-i="${i}" class="${i === index ? 'active' : ''}" aria-label="Banner ${i + 1}"></button>`
-        ).join('');
-        Array.from(dotsWrap.querySelectorAll('button')).forEach(btn => {
-          btn.addEventListener('click', () => show(+btn.dataset.i));
+      function buildDots(){
+        dotsBox.innerHTML = imgs.map((_,i)=>`<button data-i="${i}" aria-label="Slide ${i+1}"></button>`).join('');
+        dotsBox.querySelectorAll('button').forEach(btn=>{
+          btn.addEventListener('click',()=>go(+btn.dataset.i));
         });
       }
-
-      function show(i, animate = true) {
+      function go(i){
         index = (i + imgs.length) % imgs.length;
-        slides.style.transition = animate ? 'transform .6s cubic-bezier(.2,.8,.2,1)' : 'none';
-        slides.style.transform = `translateX(-${index * 100}%)`;
-        Array.from(dotsWrap.children).forEach((d, idx) =>
-          d.classList.toggle('active', idx === index)
-        );
+        slides.style.transform = `translateX(-${index*100}%)`;
+        updateDots();
       }
-
-      function startAuto() {
-        stopAuto();
-        timer = setInterval(() => show(index + 1), 3000);
+      function updateDots(){
+        dotsBox.querySelectorAll('button').forEach((b,i)=>{
+          b.classList.toggle('active', i===index);
+        });
       }
-      function stopAuto() {
-        if (timer) clearInterval(timer);
+      function auto(){
+        clearInterval(timer);
+        timer = setInterval(()=>go(index+1), 3000); // 3 detik
       }
-
-      prevBtn.addEventListener('click', () => { show(index - 1); startAuto(); });
-      nextBtn.addEventListener('click', () => { show(index + 1); startAuto(); });
-
-      root.addEventListener('mouseenter', stopAuto);
-      root.addEventListener('mouseleave', startAuto);
-
-      // drag / swipe (simple)
-      let startX = 0, currentX = 0, dragging = false;
-      function onDown(x) { dragging = true; startX = currentX = x; slides.style.transition = 'none'; stopAuto(); }
-      function onMove(x) {
-        if (!dragging) return;
-        currentX = x;
-        const dx = currentX - startX;
-        slides.style.transform = `translateX(calc(-${index * 100}% + ${dx}px))`;
-      }
-      function onUp() {
-        if (!dragging) return;
-        const dx = currentX - startX;
-        dragging = false;
-        if (Math.abs(dx) > 80) show(index + (dx < 0 ? 1 : -1));
-        else show(index);
-        startAuto();
-      }
-      root.addEventListener('mousedown', e => onDown(e.clientX));
-      window.addEventListener('mousemove', e => onMove(e.clientX));
-      window.addEventListener('mouseup', onUp);
-      root.addEventListener('touchstart', e => onDown(e.touches[0].clientX), { passive: true });
-      root.addEventListener('touchmove', e => onMove(e.touches[0].clientX), { passive: true });
-      root.addEventListener('touchend', onUp);
-
-      renderDots();
-      show(0, false);
-      startAuto();
+      prev.addEventListener('click', ()=>{go(index-1);auto();});
+      next.addEventListener('click', ()=>{go(index+1);auto();});
+      buildDots();
+      go(0);
+      auto();
     })();
   </script>
 </body>

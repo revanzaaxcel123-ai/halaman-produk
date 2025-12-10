@@ -23,7 +23,6 @@
       --bubble-2:rgba(255,204,102,.10);
       --bubble-3:rgba(140,120,255,.12);
     }
-
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
     body{
@@ -67,7 +66,6 @@
 
     .container{max-width:1280px;margin:0 auto;padding:0 20px}
 
-    /* ===== HEADER ===== */
     .header{
       display:flex;justify-content:space-between;align-items:center;
       padding:16px 0;
@@ -80,64 +78,44 @@
     .brand{display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit}
     .brand-text span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
     .nav{display:flex;gap:14px;align-items:center}
-    .nav a{color:var(--text);text-decoration:none;opacity:.9;font-size:14px}
+    .nav a{color:var(--text);text-decoration:none;opacity:.9}
     .nav a:hover{opacity:1}
     .btn{
       border:1px solid var(--line);
       padding:10px 14px;
-      border-radius:12px;
+      border-radius:10px;
       text-decoration:none;
       color:var(--text);
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:6px;
-      font-size:14px;
-      background:rgba(7,9,15,.75);
-      transition:background .2s, transform .2s, box-shadow .2s, border-color .2s;
     }
     .btn.primary{
       background:linear-gradient(135deg,var(--gold),var(--gold-2));
       border-color:transparent;
       color:#111;
       font-weight:700;
-      box-shadow:0 10px 26px rgba(212,175,55,.3);
+      box-shadow:0 8px 20px rgba(212,175,55,.25);
     }
-    .btn.primary:hover{
-      filter:brightness(1.05);
-      transform:translateY(-1px);
-      box-shadow:0 14px 32px rgba(212,175,55,.38);
-    }
-    .btn.ghost{
-      background:rgba(4,6,10,.5);
-      border-color:rgba(255,255,255,.08);
-    }
-    .btn.ghost:hover{
-      background:rgba(4,6,10,.85);
-      transform:translateY(-1px);
-    }
-    .btn.sm{padding:8px 12px;font-size:13px}
+    .btn.primary:hover{filter:brightness(1.05)}
+    .btn.ghost{background:rgba(4,6,10,.4)}
+    .btn.sm{padding:8px 12px;font-size:14px}
 
-    /* ===== HERO ===== */
+    /* ===== HERO BARU (STACK) ===== */
     .hero{
-      padding:26px 0 10px;
+      padding:28px 0 8px;
       display:flex;
       flex-direction:column;
       gap:18px;
     }
     .hero-top{
-      display:flex;
-      align-items:stretch;
-      gap:26px;
-    }
-    .hero-text{
-      flex:0 0 38%;
-      min-width:0;
+      max-width:760px;
       display:flex;
       flex-direction:column;
-      gap:10px;
+      gap:12px;
     }
-    .hero h1{font-size:40px;line-height:1.1;margin:0 0 6px}
+    .hero h1{font-size:40px;line-height:1.1;margin:0}
     .gold{color:var(--gold)}
     .mark{
       background:linear-gradient(135deg,var(--gold),var(--gold-2));
@@ -145,113 +123,39 @@
       background-clip:text;
       color:transparent;
     }
-    .hero p{color:var(--muted);margin:0}
-    .cta{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .hero p{color:var(--muted);margin:6px 0 0}
+    .cta{display:flex;gap:10px;margin-top:14px}
     .badges{
-      display:flex;gap:14px;margin:10px 0 0;padding:0;list-style:none;
-      color:var(--muted);flex-wrap:wrap;font-size:13px;
+      display:flex;gap:14px;margin:8px 0 0;padding:0;list-style:none;
+      color:var(--muted);flex-wrap:wrap;
+      font-size:14px;
     }
 
-    /* ===== Payment teleprompter ===== */
-    .payment-section{
-      margin-top:14px;
-      background:radial-gradient(circle at 0% 0%,rgba(248,212,112,.24),transparent 55%),
-                 radial-gradient(circle at 100% 0%,rgba(140,120,255,.16),transparent 55%),
-                 rgba(5,7,12,.92);
-      border-radius:16px;
-      border:1px solid rgba(246,206,74,.3);
-      padding:12px 14px;
-      position:relative;
-      overflow:hidden;
-      box-shadow:0 14px 32px rgba(0,0,0,.55);
-    }
-    .payment-header{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:8px;
-      font-size:13px;
-      color:var(--muted);
-    }
-    .payment-header span.label{
-      padding:4px 10px;
-      border-radius:999px;
-      background:rgba(7,8,12,.96);
-      border:1px solid rgba(246,206,74,.6);
-      color:var(--gold);
-      font-size:11px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      white-space:nowrap;
-    }
-    .ticker-mask{
-      position:relative;
-      overflow:hidden;
-      mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);
-      -webkit-mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);
-    }
-    .ticker{
-      display:flex;
-      gap:32px;
-      white-space:nowrap;
-      animation:ticker-move 26s linear infinite;
-      will-change:transform;
-    }
-    .ticker-item{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:6px 11px;
-      border-radius:999px;
-      background:rgba(7,8,12,.95);
-      border:1px solid rgba(255,255,255,.04);
-      box-shadow:0 0 0 1px rgba(0,0,0,.55);
-      font-size:12px;
-    }
-    .ticker-item span.badge{
-      width:22px;height:22px;border-radius:999px;
-      display:flex;align-items:center;justify-content:center;
-      background:rgba(246,206,74,.16);
-      color:var(--gold);
-      font-size:13px;
-    }
-    @keyframes ticker-move{
-      0%{transform:translateX(0)}
-      100%{transform:translateX(-50%)}
-    }
-
-    /* ===== Banner Carousel ===== */
-    .banner-wrap{
-      flex:1;
-      min-width:0;
-      display:flex;
-      align-items:stretch;
+    /* ===== Banner Carousel (FULL WIDTH) ===== */
+    .hero-banner{
+      margin-top:6px;
     }
     .banner-carousel{
       position:relative;
       width:100%;
       border-radius:26px;
-      padding:12px;
-      background:
-        linear-gradient(135deg,rgba(246,206,74,.18),rgba(76,61,165,.22));
-      box-shadow:0 26px 60px rgba(0,0,0,.75);
       overflow:hidden;
-      display:flex;
-      align-items:stretch;
-      justify-content:center;
-    }
-    .banner-frame{
-      border-radius:20px;
       background:#05070b;
-      overflow:hidden;
-      width:100%;
+      box-shadow:
+        0 26px 60px rgba(0,0,0,.65),
+        0 0 0 1px rgba(255,255,255,.03);
+    }
+    .banner-inner-ratio{
       position:relative;
+      width:100%;
+      padding-bottom:28%; /* rasio tinggi kayak premiumisme */
     }
     .banner-carousel .slides{
+      position:absolute;
+      inset:0;
       display:flex;
       transition:transform .6s cubic-bezier(.2,.8,.2,1);
       cursor:grab;
-      height:100%;
     }
     .banner-carousel.dragging .slides{
       cursor:grabbing;
@@ -259,6 +163,7 @@
     }
     .banner-carousel img{
       width:100%;
+      height:100%;
       flex:0 0 100%;
       object-fit:cover;
       transform:translateZ(0);
@@ -266,14 +171,14 @@
       filter:saturate(1.02);
       display:block;
     }
-    .banner-carousel button.nav-btn{
+    .banner-carousel button{
       position:absolute;
       top:50%;
       transform:translateY(-50%);
       background:rgba(0,0,0,.55);
       color:#fff;
       border:0;
-      font-size:20px;
+      font-size:22px;
       padding:8px;
       cursor:pointer;
       border-radius:999px;
@@ -295,31 +200,17 @@
       z-index:5;
     }
     .banner-dots button{
-      width:8px;height:8px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.7);
-      background:rgba(0,0,0,.4);
+      width:9px;height:9px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.6);
+      background:rgba(0,0,0,.2);
       padding:0;
-      cursor:pointer;
     }
-    .banner-dots button.active{
-      background:#fff;
-      border-color:transparent;
-      transform:scale(1.1);
-    }
-    .banner-hint{
-      position:absolute;
-      right:22px;
-      bottom:16px;
-      background:rgba(0,0,0,.55);
-      color:#fff;
-      padding:6px 12px;
-      border-radius:999px;
-      font-size:11px;
-      border:1px solid rgba(255,255,255,.12);
-    }
+    .banner-dots button.active{background:#fff;border-color:transparent}
+    /* hint disembunyiin */
+    .banner-hint{display:none;}
 
     /* kategori + produk */
-    .cats{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+    .cats{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
     .chip{
       background:rgba(7,9,15,.9);
       border:1px solid var(--line);
@@ -327,55 +218,36 @@
       padding:8px 12px;
       color:var(--text);
       font-size:13px;
-      cursor:pointer;
-      transition:background .2s,border-color .2s,color .2s,transform .15s;
     }
-    .chip.active{
-      border-color:var(--gold);
-      color:var(--gold);
-      background:rgba(10,10,15,.95);
-      transform:translateY(-1px);
-    }
+    .chip.active{border-color:var(--gold);color:var(--gold)}
 
     .section-title{font-size:24px;margin:26px 0 12px}
     .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
     .card{
       background:var(--panel);
       border:1px solid var(--line);
-      border-radius:16px;
+      border-radius:14px;
       overflow:hidden;
       display:flex;
       flex-direction:column;
       position:relative;
-      transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s;
+      transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s;
       will-change:transform;
-    }
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      opacity:0;
-      background:radial-gradient(circle at top left,rgba(246,206,74,.18),transparent 55%);
-      transition:opacity .35s;
     }
     .card:hover{
       transform:translateY(-8px);
-      box-shadow:0 20px 40px rgba(0,0,0,.35), 0 0 0 1px rgba(212,175,55,.18);
-      border-color:rgba(212,175,55,.5);
+      box-shadow:0 20px 40px rgba(0,0,0,.35), 0 0 0 1px rgba(212,175,55,.15);
     }
-    .card:hover::before{opacity:1}
     .card img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#111}
     .card-body{padding:14px;display:flex;gap:8px;flex-direction:column}
     .pill{
       display:inline-block;padding:4px 8px;border-radius:999px;
       border:1px solid var(--line);
-      font-size:11px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;
+      font-size:12px;color:var(--muted);
     }
     .row{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
-    .price{color:var(--gold);font-weight:800;font-size:14px}
-    .desc{color:var(--muted);font-size:13px}
-    .card h3{margin:4px 0 0;font-size:16px}
+    .price{color:var(--gold);font-weight:800}
+    .desc{color:var(--muted)}
     .card h3 a{
       background:linear-gradient(90deg,#fff,var(--gold),#fff);
       background-size:200% 100%;
@@ -393,7 +265,7 @@
       display:flex;gap:12px;align-items:flex-start;
       background:var(--panel);
       border:1px solid var(--line);
-      border-radius:16px;
+      border-radius:14px;
       padding:14px;
     }
     .feature .ico{
@@ -412,7 +284,7 @@
     .foot-brand{gap:10px;margin-bottom:10px}
     .muted{color:var(--muted)}
     .links{margin:0;padding:0;list-style:none;display:grid;gap:8px}
-    .links a{color:var(--text);text-decoration:none;opacity:.9;font-size:14px}
+    .links a{color:var(--text);text-decoration:none;opacity:.9}
     .links a:hover{opacity:1}
 
     .wa{
@@ -422,34 +294,82 @@
     }
     .wa img{width:28px;height:28px;display:block}
 
+    /* ===== Payment ticker (teleprompter) ===== */
+    .payment-section{
+      margin-top:12px;
+      background:linear-gradient(135deg,rgba(248,212,112,.09),rgba(8,10,18,.9));
+      border-radius:18px;
+      border:1px solid rgba(246,206,74,.25);
+      padding:12px 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .payment-header{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:8px;
+      font-size:14px;
+      color:var(--muted);
+      flex-wrap:wrap;
+    }
+    .payment-header span.label{
+      padding:4px 10px;
+      border-radius:999px;
+      background:rgba(7,8,12,.9);
+      border:1px solid rgba(246,206,74,.4);
+      color:var(--gold);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .ticker-mask{
+      position:relative;
+      overflow:hidden;
+    }
+    .ticker{
+      display:flex;
+      gap:32px;
+      white-space:nowrap;
+      animation:ticker-move 26s linear infinite;
+      will-change:transform;
+    }
+    .ticker-item{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(7,8,12,.9);
+      border:1px solid rgba(255,255,255,.04);
+      box-shadow:0 0 0 1px rgba(0,0,0,.4);
+      font-size:13px;
+    }
+    .ticker-item span.badge{
+      width:22px;height:22px;border-radius:999px;
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(246,206,74,.14);
+      color:var(--gold);
+      font-size:13px;
+    }
+    @keyframes ticker-move{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-50%)}
+    }
+
     /* responsive */
     @media (max-width:980px){
-      .hero-top{
-        flex-direction:column;
-      }
-      .hero-text{
-        flex:0 0 auto;
-      }
-      .banner-wrap{
-        flex:0 0 auto;
-      }
-      .banner-carousel{
-        padding:10px;
-        border-radius:22px;
-      }
+      .hero h1{font-size:32px}
       .grid{grid-template-columns:repeat(2,1fr)}
       .foot-grid{grid-template-columns:1fr 1fr}
+      .banner-inner-ratio{padding-bottom:40%;}
     }
     @media (max-width:560px){
       .grid{grid-template-columns:1fr}
       .nav{display:none}
-      .hero h1{font-size:30px}
-      .payment-section{padding:10px 10px}
-      .banner-carousel{
-        padding:8px;
-        border-radius:20px;
-      }
-      .banner-hint{display:none}
+      .hero h1{font-size:28px}
+      .payment-section{padding:10px 12px}
+      .banner-inner-ratio{padding-bottom:52%;}
     }
 
     /* mobile: kurangin anim berat */
@@ -490,6 +410,7 @@
   </header>
 
   <section class="hero container">
+    <!-- teks + payment -->
     <div class="hero-top">
       <div class="hero-text">
         <h1>Belanja <span class="gold">lebih premium</span> di <span class="mark">VanzShop.com</span></h1>
@@ -503,77 +424,76 @@
           <li>⚡ Proses cepat</li>
           <li>🛡️ Garansi aman</li>
         </ul>
-
-        <!-- Payment teleprompter -->
-        <div class="payment-section">
-          <div class="payment-header">
-            <span class="label">Metode Pembayaran</span>
-            <span>Didukung banyak channel resmi: QRIS, bank & e-wallet.</span>
-          </div>
-          <div class="ticker-mask">
-            <div class="ticker">
-              <!-- blok 1 -->
-              <div class="ticker-item">
-                <span class="badge">💳</span><span>QRIS All Payment</span>
-              </div>
-              <div class="ticker-item">
-                <span class="badge">🏦</span><span>Duitku Virtual Account</span>
-              </div>
-              <div class="ticker-item">
-                <span class="badge">🏧</span><span>BCA / BRI / BNI / Mandiri</span>
-              </div>
-              <div class="ticker-item">
-                <span class="badge">📱</span><span>DANA · OVO · GoPay · LinkAja</span>
-              </div>
-              <div class="ticker-item">
-                <span class="badge">🌐</span><span>Alfamart / Indomaret (via kode bayar)</span>
-              </div>
-              <div class="ticker-item">
-                <span class="badge">🪙</span><span>e-Wallet Lain via QRIS</span>
-              </div>
-              <!-- duplikat utk loop halus -->
-              <div class="ticker-item">
-                <span class="badge">💳</span><span>QRIS All Payment</span>
-              </div>
-              <div class="ticker-item">
-                <span class="badge">🏦</span><span>Duitku Virtual Account</span>
-              </div>
-              <div class="ticker-item">
-                <span class="badge">🏧</span><span>BCA / BRI / BNI / Mandiri</span>
-              </div>
-              <div class="ticker-item">
-                <span class="badge">📱</span><span>DANA · OVO · GoPay · LinkAja</span>
-              </div>
-              <div class="ticker-item">
-                <span class="badge">🌐</span><span>Alfamart / Indomaret (via kode bayar)</span>
-              </div>
-              <div class="ticker-item">
-                <span class="badge">🪙</span><span>e-Wallet Lain via QRIS</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end payment section -->
       </div>
 
-      <div class="banner-wrap">
-        <!-- Banner Carousel Start -->
-        <div class="banner-carousel">
-          <div class="banner-frame">
-            <div class="slides">
-              <img src="/assets/banner/banner1.jpg" alt="Banner 1" loading="lazy" decoding="async">
-              <img src="/assets/banner/banner2.jpg" alt="Banner 2" loading="lazy" decoding="async">
-              <img src="/assets/banner/banner3.jpg" alt="Banner 3" loading="lazy" decoding="async">
-              <img src="/assets/banner/banner4.jpg" alt="Banner 4" loading="lazy" decoding="async">
-              <img src="/assets/banner/banner5.jpg" alt="Banner 5" loading="lazy" decoding="async">
+      <!-- Payment teleprompter -->
+      <div class="payment-section">
+        <div class="payment-header">
+          <span class="label">Metode Pembayaran</span>
+          <span>Didukung banyak channel resmi: QRIS, bank & e-wallet.</span>
+        </div>
+        <div class="ticker-mask">
+          <div class="ticker">
+            <!-- blok 1 -->
+            <div class="ticker-item">
+              <span class="badge">💳</span><span>QRIS All Payment</span>
+            </div>
+            <div class="ticker-item">
+              <span class="badge">🏦</span><span>Duitku Virtual Account</span>
+            </div>
+            <div class="ticker-item">
+              <span class="badge">🏧</span><span>BCA / BRI / BNI / Mandiri</span>
+            </div>
+            <div class="ticker-item">
+              <span class="badge">📱</span><span>DANA · OVO · GoPay · LinkAja</span>
+            </div>
+            <div class="ticker-item">
+              <span class="badge">🌐</span><span>Alfamart / Indomaret (via kode bayar)</span>
+            </div>
+            <div class="ticker-item">
+              <span class="badge">🪙</span><span>e-Wallet Lain via QRIS</span>
+            </div>
+            <!-- duplikat utk loop halus -->
+            <div class="ticker-item">
+              <span class="badge">💳</span><span>QRIS All Payment</span>
+            </div>
+            <div class="ticker-item">
+              <span class="badge">🏦</span><span>Duitku Virtual Account</span>
+            </div>
+            <div class="ticker-item">
+              <span class="badge">🏧</span><span>BCA / BRI / BNI / Mandiri</span>
+            </div>
+            <div class="ticker-item">
+              <span class="badge">📱</span><span>DANA · OVO · GoPay · LinkAja</span>
+            </div>
+            <div class="ticker-item">
+              <span class="badge">🌐</span><span>Alfamart / Indomaret (via kode bayar)</span>
+            </div>
+            <div class="ticker-item">
+              <span class="badge">🪙</span><span>e-Wallet Lain via QRIS</span>
             </div>
           </div>
-          <button class="nav-btn prev" aria-label="Slide sebelumnya">&#10094;</button>
-          <button class="nav-btn next" aria-label="Slide berikutnya">&#10095;</button>
-          <div class="banner-dots" aria-label="pager"></div>
-          <div class="banner-hint">Drag / geser • Auto 3s</div>
         </div>
-        <!-- Banner Carousel End -->
+      </div>
+      <!-- end payment section -->
+    </div>
+
+    <!-- Banner gede full width -->
+    <div class="hero-banner">
+      <div class="banner-carousel">
+        <div class="banner-inner-ratio">
+          <div class="slides">
+            <img src="/assets/banner/banner1.jpg" alt="Banner 1" loading="lazy" decoding="async">
+            <img src="/assets/banner/banner2.jpg" alt="Banner 2" loading="lazy" decoding="async">
+            <img src="/assets/banner/banner3.jpg" alt="Banner 3" loading="lazy" decoding="async">
+            <img src="/assets/banner/banner4.jpg" alt="Banner 4" loading="lazy" decoding="async">
+            <img src="/assets/banner/banner5.jpg" alt="Banner 5" loading="lazy" decoding="async">
+          </div>
+          <button class="prev" aria-label="Slide sebelumnya">&#10094;</button>
+          <button class="next" aria-label="Slide berikutnya">&#10095;</button>
+          <div class="banner-dots" aria-label="pager"></div>
+          <div class="banner-hint"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -600,7 +520,7 @@
           <p class="desc">Akses template & fitur premium untuk desain apa pun.</p>
           <div class="row">
             <span class="price">Mulai Rp 25.000</span>
-            <a class="btn sm primary" href="/beli/index.html?slug=canva">Beli</a>
+            <a class="btn sm" href="/beli/index.html?slug=canva">Beli</a>
           </div>
         </div>
       </article>
@@ -616,7 +536,7 @@
           <p class="desc">Export tanpa watermark & resource premium.</p>
           <div class="row">
             <span class="price">Mulai Rp 20.000</span>
-            <a class="btn sm primary" href="/beli/index.html?slug=capcut">Beli</a>
+            <a class="btn sm" href="/beli/index.html?slug=capcut">Beli</a>
           </div>
         </div>
       </article>
@@ -632,7 +552,7 @@
           <p class="desc">Akses tools AI untuk kerja & belajar makin cepat.</p>
           <div class="row">
             <span class="price">Mulai Rp 30.000</span>
-            <a class="btn sm primary" href="/beli/index.html?slug=chatgpt">Beli</a>
+            <a class="btn sm" href="/beli/index.html?slug=chatgpt">Beli</a>
           </div>
         </div>
       </article>
@@ -648,7 +568,7 @@
           <p class="desc">Edit video/animasi di HP dengan fitur premium.</p>
           <div class="row">
             <span class="price">Mulai Rp 20.000</span>
-            <a class="btn sm primary" href="/beli/index.html?slug=alightmotion">Beli</a>
+            <a class="btn sm" href="/beli/index.html?slug=alightmotion">Beli</a>
           </div>
         </div>
       </article>
@@ -664,7 +584,7 @@
           <p class="desc">Tonton tanpa iklan, termasuk YouTube Music.</p>
           <div class="row">
             <span class="price">Mulai Rp 30.000</span>
-            <a class="btn sm primary" href="/beli/index.html?slug=youtube">Beli</a>
+            <a class="btn sm" href="/beli/index.html?slug=youtube">Beli</a>
           </div>
         </div>
       </article>
@@ -680,7 +600,7 @@
           <p class="desc">Dengerin lagu bebas iklan & download offline.</p>
           <div class="row">
             <span class="price">Mulai Rp 25.000</span>
-            <a class="btn sm primary" href="/beli/index.html?slug=spotify">Beli</a>
+            <a class="btn sm" href="/beli/index.html?slug=spotify">Beli</a>
           </div>
         </div>
       </article>
@@ -696,7 +616,7 @@
           <p class="desc">Meeting panjang tanpa limit, fitur rekam & lainnya.</p>
           <div class="row">
             <span class="price">Mulai Rp 40.000</span>
-            <a class="btn sm primary" href="/beli/index.html?slug=zoom">Beli</a>
+            <a class="btn sm" href="/beli/index.html?slug=zoom">Beli</a>
           </div>
         </div>
       </article>
@@ -712,7 +632,7 @@
           <p class="desc">Nonton film & series favorit, kualitas HD hingga 4K.</p>
           <div class="row">
             <span class="price">Mulai Rp 35.000</span>
-            <a class="btn sm primary" href="/beli/index.html?slug=netflix">Beli</a>
+            <a class="btn sm" href="/beli/index.html?slug=netflix">Beli</a>
           </div>
         </div>
       </article>
